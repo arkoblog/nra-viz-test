@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom')
 var L = require('leaflet');
 var $ = require('jquery');
 var polygons = require('../data/polygons');
-
+// var Sidebar = require('./Sidebar')
 
 var baseMapUrl = 'http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
 var allDistricts = ["dhading", "nuwakot", "sindhupalchok", "gorkha", "dolakha"]
@@ -61,13 +61,13 @@ var Body = React.createClass({
                 name:name,
                 level:level,
                 district: name
-            })
+            }, this.props.onSelectionUpdate(code,level,name,name))
         } else {
             this.setState({
                 code:code,
                 name:name,
                 level:level,
-            })  
+            }, this.props.onSelectionUpdate(code,level,name,this.state.district))  
         }
     },
     getColor: function(d, type) {
@@ -240,8 +240,15 @@ var Body = React.createClass({
             }
         }.bind(this))
 
+        L.control.scale().addTo(map);
+        
+        var sidebar = L.control.sidebar('sidebar',{ position: 'right' }).addTo(map);
+        this.props.sidebarOpener(false);
+        sidebar.open('home')
+
     },
     componentDidMount: function() {
+        console.log(this.props.children)
         this.loadMap();
     },
 	render: function () {

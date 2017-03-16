@@ -124,6 +124,7 @@ var Maps = React.createClass({
 
 
     componentDidMount: function() {
+        console.log("highlightFeature")
         this.rendermap();
 
         // this.addMarkers(this.props.data);
@@ -138,7 +139,7 @@ var Maps = React.createClass({
         return (
                         
                         <div>
-
+                        {this.props.children}
                         <div id="map" className = "sidebar-map" style={{height:this.state.height}}>
                         </div>
                         </div> 

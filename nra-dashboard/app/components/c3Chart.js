@@ -2,6 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var d3 = require('d3');
 var c3 = require('c3');
+var _ = require('lodash')
 
 // const columns = [
 //   ['My Numbers', 30, 200, 100, 400, 150, 250],
@@ -63,6 +64,64 @@ var LineAreaBar = React.createClass({
     return <div id={this.props.id} ref="refName" ></div>;    
   }
 });
+
+var Bar = React.createClass({
+  componentWillMount: function() {
+    this._updateChart();
+  },
+  componentDidMount: function() {
+    this._updateChart();
+  },
+  componentDidUpdate: function() {
+    this._updateChart();
+  },
+  _updateChart: function() {
+    // var labels= this.props.columns[0]
+    // console.log("MyColumns", this.props.columns[0])
+     var labels =_.map(this.props.data,"title")
+
+     c3.generate({
+      bindto: '#'+ this.props.id,
+      data: {
+            json: this.props.data,
+            keys: {
+                x: 'title', // it's possible to specify 'x' when category axis
+                value: ['value'],
+            },
+            type:"bar",
+            labels:{
+                         format: function (v, id, i, j) { return labels[i]=="dummy" ? "" : labels[i] + " / " + v + "%"  },
+            }
+        },
+        color: {
+          pattern: ['#29BF9A']
+        },
+        axis: {
+            rotated:true,
+            x: {
+                show:false,
+                type: 'category'
+            },
+            y: {
+              show:false
+            }
+        },
+      legend: {
+          show: false
+      },
+    tooltip: {
+        show: false
+    },
+      size: {
+        height:chartHeight
+      }
+    });
+  },
+  render() {
+    return <div id={this.props.id} ref="refName" ></div>;    
+  }
+});
+
 
 var StackedBar = React.createClass({
   componentWillMount: function() {
@@ -231,5 +290,6 @@ module.exports={
   LineAreaBar : LineAreaBar,
   Scatter: Scatter,
   StackedBar: StackedBar,
-  ClusteredColumn:ClusteredColumn
+  ClusteredColumn:ClusteredColumn,
+  Bar:Bar
 };

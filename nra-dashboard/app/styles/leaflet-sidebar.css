@@ -124,14 +124,17 @@
       min-width: 420px; } }
 
 .sidebar-header {
-  margin: -10px -20px 0;
+  margin: -10px -25px 0;
   height: 40px;
-  padding: 0 20px;
+  padding: 0 0px;
   line-height: 40px;
   border-radius: 0px;
-  font-size: 14.4pt;
-  color: #29BF9A;
-  /*background-color: #29BF9A; */
+  font-size: 12px;
+  text-transform: bold;
+  font-weight: 600;
+  color: rgb(245,245,245);
+  text-align: left;
+  background-color: #29BF9A; 
 }
   .sidebar-right .sidebar-header {
     padding-left: 40px; }
