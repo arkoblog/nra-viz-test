@@ -22,7 +22,7 @@ require("../styles/styles.css")
 
 var Sidebar = React.createClass({
     componentDidUpdate: function() {
-    	console.log(this.props.data);
+    	// console.log(this.props.data);
     },
 
 	render: function(){

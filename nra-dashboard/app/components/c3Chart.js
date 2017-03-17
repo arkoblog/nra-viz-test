@@ -249,7 +249,7 @@ var Scatter = React.createClass({
     this._updateChart();
   },
   _updateChart: function() {
-    console.log("MyColumns", this.props.columns)
+    // console.log("MyColumns", this.props.columns)
      chart = c3.generate({
       bindto: '#'+this.props.id,
       data: {
