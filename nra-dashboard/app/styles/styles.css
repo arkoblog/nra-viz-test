@@ -6,7 +6,7 @@ html {
     color: #000;
     font-weight: 400;
     width: 100% !important;
-    background-color:   rgb(245,245,245);
+    background-color: rgb(245, 245, 245);
 }
 
 h2 {
@@ -139,140 +139,160 @@ a:focus,
 
 
 /*Navbar Styling*/
+
 .navbar {
-    margin:0;
+    margin: 0;
 }
 
 .navbar-custom {
-    color: rgb(41,191,154);
-    background-color: rgb(245,245,245);
+    color: rgb(41, 191, 154);
+    background-color: rgb(245, 245, 245);
 }
 
-.navbar-custom a{
-    color: rgb(41,191,154);
+.navbar-custom a {
+    color: rgb(41, 191, 154);
 }
+
 
 /*Maps*/
 
 .test {
-    border :1px solid bisque;
+    border: 1px solid #29BF9A;
 }
 
 #map {
-    position = relative;
-    height:20px;
+    position=relative;
+    height: 20px;
 }
 
 .insights-row {
-    height:5vh;
+    height: 5vh;
 }
 
 .leaflet-container {
     z-index: 0;
 }
 
+
 /*Charts*/
 
-.c3 .c3-axis-x path, .c3 .c3-axis-x line {
-    stroke: rgb(245,245,245);
+.c3 .c3-axis-x path,
+.c3 .c3-axis-x line {
+    stroke: rgb(245, 245, 245);
 }
 
-.c3 .c3-axis-y path, .c3 .c3-axis-y line {
-    stroke: rgb(245,245,245);
+.c3 .c3-axis-y path,
+.c3 .c3-axis-y line {
+    stroke: rgb(245, 245, 245);
 }
 
 
 /*Text*/
+
 .total-surveys {
-    color: rgb(41,191,154);
+    color: rgb(41, 191, 154);
     font-weight: bolder;
-    font-size:40px;
+    font-size: 40px;
 }
 
 .total-survey-label {
-    margin-top:-10px;
-    color: rgb(41,191,154);
+    margin-top: -10px;
+    color: rgb(41, 191, 154);
     font-weight: 300;
-    font-size:15px;
-    text-transform:uppercase;
+    font-size: 15px;
+    text-transform: uppercase;
 }
 
 .bar-header {
-    color: rgb(41,191,154);
+    color: rgb(41, 191, 154);
     font-weight: 300;
-    font-size:15px;
-    text-transform:uppercase;
+    font-size: 15px;
+    text-transform: uppercase;
 }
+
 
 /*Links*/
+
 .more {
     font-family: 'Open Sans', serif;
-    font-size:10px;
+    font-size: 10px;
 }
 
+
 /*Modal*/
+
 #chart4 {
-    height:500px;
+    height: 500px;
 }
 
 
 /*Dropdown*/
-.styled-select {
-   /*background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 98% 0;*/
-   height: 29px;
-   overflow: hidden;
-    font-family: 'Open Sans', serif;
-    color: rgb(41,191,154);
 
+.styled-select {
+    /*background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 98% 0;*/
+    height: 29px;
+    overflow: hidden;
+    font-family: 'Open Sans', serif;
+    color: rgb(41, 191, 154);
 }
 
 .styled-select select {
-   background: transparent;
-   border: none;
-   font-size: 14px;
-   height: 29px;
-   padding: 0px; /* If you add too much padding here, the options won't show in IE */
-   width: 100%;
-   text-transform: uppercase;
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    height: 29px;
+    padding: 0px;
+    /* If you add too much padding here, the options won't show in IE */
+    width: 100%;
+    text-transform: uppercase;
 }
 
 .styled-select.slate {
-   background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
-   height: 34px;
-   width: 240px;
+    background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
+    height: 34px;
+    width: 240px;
 }
 
 .styled-select.slate select {
-   border: 1px solid #ccc;
-   font-size: 16px;
-   height: 34px;
-   width: 268px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    height: 34px;
+    width: 268px;
 }
 
 .semi-square {
-/*   -webkit-border-radius: 5px;
+    /*   -webkit-border-radius: 5px;
    -moz-border-radius: 5px;
    border-radius: 5px;*/
-   border-bottom:1px solid rgb(41,191,154);
+    border-bottom: 1px solid rgb(41, 191, 154);
 }
 
-.blue    { background-color: rgba(41,191,154,0.1); }
-
+.blue {
+    background-color: rgba(41, 191, 154, 0.1);
+}
 
 .slight-padding {
-    padding-top:6px;
+    padding-top: 6px;
 }
 
 .right-column {
-    border-left:  1px dashed rgba(41,191,154,0.5);
+    border-left: 1px dashed rgba(41, 191, 154, 0.5);
 }
 
 .modal-header {
     font-family: 'Open Sans', serif;
-    color: rgb(41,191,154);
-    text-transform:uppercase;
-    padding-left:0;
-   border-bottom:1px solid rgba(41,191,154,0.5);
-
+    color: rgb(41, 191, 154);
+    text-transform: uppercase;
+    padding-left: 0;
+    border-bottom: 1px solid rgba(41, 191, 154, 0.5);
     /*font-size: 30px;*/
+}
+
+
+/*Charts*/
+
+.tooltip {
+    /*font-family: 'Open Sans', serif;*/
+    color: rgb(41, 191, 154);
+    /*padding: 5px 20px;*/
 }
