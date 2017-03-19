@@ -5,20 +5,31 @@ var polygons = require('../data/polygons');
 var _ = require('lodash')
 
 var baseMapUrl = 'http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
+var currentDistricts = ['nuwakot', 'sindhupalchowk', 'dolakha', 'gorkha', 'dhading']
 
 
 var NepalMap = React.createClass({
     getInitialState: function() {
+        var maxWindowHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - 55;
+        // console.log(maxWindowHeight)
         return {
-            height: "95vh"
+            height: maxWindowHeight
         }
     },
+
+    _updateDimensions: function() {
+        var maxWindowHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - 55;
+        this.setState({
+            height: maxWindowHeight
+        })
+    },  
     componentWillMount: function() {
         var attributeData = this.attributeData = this._prepareAttributeData(this.props.data.percentageStats.regionalStats);
 
     },
     componentDidMount: function() {
         this._loadMap();
+        window.addEventListener("resize", this._updateDimensions);
     },
     _prepareAttributeData: function(data) {
         // console.log(data)
