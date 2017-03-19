@@ -44,7 +44,7 @@ var Sidebar = React.createClass({
 			                    <span className="sidebar-close"><i className="fa fa-remove"></i></span>
 			                	{this.props.header}
 			                </h1>
-								<Insights data={this.props.data}/>
+								<Insights  data={this.props.data}/>
 			            </div>
 
 			        </div>

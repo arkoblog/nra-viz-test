@@ -276,3 +276,10 @@ a:focus,
 
     /*font-size: 30px;*/
 }
+
+/*Charts*/
+.tooltip {
+    /*font-family: 'Open Sans', serif;*/
+    color: rgb(41,191,154);
+    /*padding: 5px 20px;*/
+}

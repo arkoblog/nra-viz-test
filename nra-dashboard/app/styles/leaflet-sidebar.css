@@ -164,9 +164,9 @@
       margin-right: 0; } }
 
 .sidebar {
--moz-box-shadow:    0 1px 5px rgba(0, 0, 0, 0.0); 
-  -webkit-box-shadow:  0 1px 5px rgba(0, 0, 0, 0.0); 
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.0); }
+-moz-box-shadow:    0 1px 5px rgba(0, 0, 0, 0.5); 
+  -webkit-box-shadow:  0 1px 5px rgba(0, 0, 0, 0.5); 
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5); }
 
   .sidebar.leaflet-touch {
     box-shadow: none;
@@ -221,25 +221,25 @@ right: 50px; } }
 
   @media (min-width: 768px) {
     .sidebar-tabs {
-        background-color: rgba(245,245,245,0);
-        height:15%;
+        background-color: rgba(245,245,245,0.95);
+        height:100%;
        }
     }
   @media (min-width: 768px) and (max-width: 991px) {
     .sidebar-tabs {
-        background-color: rgba(245,245,245,0);      
-        height:15%;
+        background-color: rgba(245,245,245,0.95);      
+        height:100%;
        }
     }
   @media (min-width: 992px) and (max-width: 1199px) {
     .sidebar-tabs {
-         background-color: rgba(245,245,245,0);     
-        height:15%;
+         background-color: rgba(245,245,245,0.95);     
+        height:100%;
        }
     }
   @media (min-width: 1200px) {
     .sidebar-tabs {
-        background-color: rgba(245,245,245,0);      
-        height:15%;
+        background-color: rgba(245,245,245,0.95);      
+        height:100%;
        }
     }

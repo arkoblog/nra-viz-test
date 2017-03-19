@@ -8,7 +8,7 @@ var _ = require('lodash')
 //   ['My Numbers', 30, 200, 100, 400, 150, 250],
 //   ['Your Numbers', 50, 20, 10, 40, 15, 25]
 // ];
-var chartHeight=screen.height*0.15;
+var chartHeight=screen.height*0.25;
 var modalchartHeight=screen.height*0.5;
 
 var LineAreaBar = React.createClass({
@@ -69,28 +69,54 @@ var Bar = React.createClass({
   componentWillMount: function() {
     this._updateChart();
   },
+  _formatData: function(data) {
+    var formattedData = []
+    _.forEach(data, function(value, key){
+      var emptyObject = {}
+      emptyObject.title=key;
+      emptyObject.value=value;
+      // console.log("values", this.props.values)
+      emptyObject.percentage = Number(this.props.values[key])
+      formattedData.push(emptyObject)
+
+    }.bind(this))
+    // console.log(formattedData)
+    return formattedData;
+  },
   componentDidMount: function() {
     this._updateChart();
   },
   componentDidUpdate: function() {
     this._updateChart();
   },
+  _chartHeight: function() {
+    // console.log(this.props.percentageData)
+    chartHeight=screen.height*0.10;
+    var length = Object.keys(this.props.percentageData).length
+    chartHeight = chartHeight * length/3
+  }, 
   _updateChart: function() {
     // var labels= this.props.columns[0]
     // console.log("MyColumns", this.props.columns[0])
-     var labels =_.map(this.props.data,"title")
+     var myChartData = this._formatData(this.props.percentageData);
+     var myValues = _.values(this.props.values)
+     this._chartHeight()
+     // console.log(myChartData)
+     var labels =_.map(myChartData,"title")
+     // console.log(labels)
 
      c3.generate({
       bindto: '#'+ this.props.id,
       data: {
-            json: this.props.data,
+            json: myChartData,
             keys: {
                 x: 'title', // it's possible to specify 'x' when category axis
                 value: ['value'],
             },
             type:"bar",
             labels:{
-                         format: function (v, id, i, j) { return labels[i]=="dummy" ? "" : labels[i] + " / " + v + "%"  },
+                         format: function (v, id, i, j) {return labels[i]=="dummy" ? "" : labels[i] + " / " + v + "%"},
+                         // + " / " + myValues[i]  
             }
         },
         color: {
@@ -103,22 +129,43 @@ var Bar = React.createClass({
                 type: 'category'
             },
             y: {
-              show:false
+              show:false,
+              max: 100
             }
         },
       legend: {
           show: false
       },
+  //     tooltip: {
+  //         format: {
+
+  //             title: function (value, ratio, id, index) { 
+  //                     return  labels[value]; },
+  //             value: function (value, ratio, id, index) {
+  //                 // console.log(labels[index])
+  //                 var format = d3.format('.0%');
+  //                 return format(value/100);
+  //             }
+  //             name: function (name, ratio, id, index) { return name; }
+  // //            value: d3.format(',') // apply this format to both y and y2
+  //       }
+  //     },
+    // tooltip: {
+    //     show: false
+    // },
     tooltip: {
-        show: false
+        contents: function (d, defaultTitleFormat, defaultValueFormat, color, index) {
+            console.log(d[0].index);
+            return "<div class=test style='font-size:10px;padding:10px;background-color:rgb(245,245,245)'><font color='red'>" + labels[d[0].index] + "<br/>" +myValues[d[0].index] +"</font></div>";
+        }
     },
       size: {
         height:chartHeight
-      }
+             }
     });
   },
   render() {
-    return <div id={this.props.id} ref="refName" ></div>;    
+    return <div id={this.props.id} className="test" ref="refName" ></div>;    
   }
 });
 
