@@ -4,13 +4,14 @@ var NepalMap = require('../components/Map.js')
 var axios = require('axios')
 var Sidebar = require('./Sidebar')
 var FetchData = require('../utils/FetchData')
+var Loading = require('react-loading');
 require("../styles/styles.css")
 
 var Root = React.createClass({
     getInitialState: function() {
         return {
             data: {
-                "success": 1,
+                "success": 0,
                 "stats": {
                     survey_status: {
                         "surveys": "21363",
@@ -67,22 +68,30 @@ var Root = React.createClass({
             isSideBarOpen: false
         }
     },
-    onParameterChange(params) {
+    onParameterChange(params, callback) {
         FetchData(params).then(function(response) {
+            console.log("Fetched Data", response)
             this.setState({
                 data: response.data
-            })
+            }, callback)
         }.bind(this))
     },
     componentWillMount: function() {
         this.onParameterChange(this.state.filterParams);
+
+        // FetchData(this.state.fil).then(function(response) {
+        //     console.log("Fetched Data", response)
+        //     this.setState({
+        //         data: response.data
+        //     })
+        // }.bind(this))
     },
     sidebarOpener: function(isSideBarOpen) {
         this.setState({
             isSideBarOpen: !isSideBarOpen
         })
     },
-    onSelectionUpdate: function(newParams) {
+    onSelectionUpdate: function(newParams, callback) {
         // console.log("Updated Parameters",newParams);
         if (newParams.district == "*") {
             this.setState({
@@ -99,17 +108,22 @@ var Root = React.createClass({
             vdc: newParams.vdc
         }
 
-        this.onParameterChange(params)
+        this.onParameterChange(params, callback)
     },
 
     render: function() {
-        return (
-            <div>
-					<Nav/>
-					<NepalMap data = {this.state.data} onSelectionUpdate={this.onSelectionUpdate} sidebarOpener={this.sidebarOpener}> 
-					<Sidebar data={this.state.data} header={this.state.header}/> </NepalMap>
-			</div>
-        )
+        if (this.state.data.success != 1) {
+            return( <div className = "center-div"><Loading type='bars' color='#31BF9A' /></div>)
+        } else {
+
+            return (
+                <div>
+    					<Nav/>
+                        <NepalMap data = {this.state.data} onSelectionUpdate={this.onSelectionUpdate} sidebarOpener={this.sidebarOpener}> 
+                        <Sidebar data={this.state.data} header={this.state.header}/> </NepalMap>
+                </div>
+            )
+        }
 
     }
 })
