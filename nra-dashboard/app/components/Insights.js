@@ -15,32 +15,38 @@ var customStyles = {
 };
 
 var Insights = React.createClass({
-    componentWillMount: function() {},
+    componentWillMount: function() {
+        console.log("My data",this.props.data.stats.survey_status)
+    },
+    _formatNumber: function(data) {
+        var format = d3.format(",");
+        return format(data)
+    },
     render: function() {
         return (
             <div className="row-fluid ">
 
-                <div className="col-md-12 col-lg-12 col-sm-12">
-                    <div className="row-fluid bar-header">Surveys Submitted</div>
+                <div className="content-row col-md-12 col-lg-12 col-sm-12">
+                    <div className="row-fluid bar-header">total beneficiaries surveyed</div>
                     <div className="row-fluid total-surveys">{this.props.data.stats.survey_status.surveys}</div>
+                    <div className="row-fluid proportion-surveys">out of {this._formatNumber(this.props.data.stats.survey_status.beneficiaries)} beneficiaries</div>
                 </div>
 
-                <div className="col-md-12 col-lg-12 col-sm-12">
+                <div className="content-row col-md-12 col-lg-12 col-sm-12">
                     <div className="row-fluid bar-header">Recieved the last grant?</div>
-                    <a className="more">Learn More >>
-                    </a>
+
                     <div className="row-fluid ">
                     <Chart.Bar id="chart3" percentageData= {this.props.data.percentageStats.grant_status} values = {this.props.data.stats.grant_status}/>
                     </div>
                 </div>
 
-                <div className="col-md-12 col-lg-12 col-sm-12 ">
+                <div className="content-row col-md-12 col-lg-12 col-sm-12 ">
                     <div className="row-fluid bar-header">status of construction</div>
                     <a className="more">Learn More >></a>
                     <div className="row-fluid  "><Chart.Bar id="chart1" percentageData = {this.props.data.percentageStats.construction_status} values = {this.props.data.stats.construction_status}/></div>
                 </div>
 
-                <div className="col-md-12 col-lg-12 col-sm-12">
+                <div className="content-row col-md-12 col-lg-12 col-sm-12">
                     <div className="row-fluid bar-header">Applied for second installment?</div>
                     <a className="more">Learn More >>
                     </a>

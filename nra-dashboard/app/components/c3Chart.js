@@ -107,7 +107,7 @@ var Bar = React.createClass({
                 }
             },
             color: {
-                pattern: ['#29BF9A']
+                pattern: ['#4b8b7b']
             },
             axis: {
                 rotated: true,
@@ -125,7 +125,7 @@ var Bar = React.createClass({
             },
             tooltip: {
                 contents: function(d, defaultTitleFormat, defaultValueFormat, color, index) {
-                    return "<div class='test' style='font-size:10px;padding:10px;background-color:rgb(245,245,245)'><font color='#29BF9A'>" + labels[d[0].index] + "<br/>" + myValues[d[0].index] + " / " + d[0].value + "% </font></div>";
+                    return "<div class='test' style='font-size:10px;padding:10px;background-color:rgb(245,245,245)'><font color='#4b8b7b'>" + labels[d[0].index] + "<br/>" + myValues[d[0].index] + " / " + d[0].value + "% </font></div>";
                 }
             },
             size: {

@@ -104,13 +104,13 @@
 .sidebar-tabs > li:hover,
 .sidebar-tabs > ul > li:hover {
     color: #fff;
-    background-color: #29BF9A;
+    background-color: #4b8b7b;
 }
 
 .sidebar-tabs > li.active,
 .sidebar-tabs > ul > li.active {
     color: #fff;
-    background-color: #29BF9A;
+    background-color: #4b8b7b;
 }
 
 .sidebar-tabs > li.disabled,
@@ -208,7 +208,7 @@
     font-weight: 600;
     color: rgb(245, 245, 245);
     text-align: left;
-    background-color: #29BF9A;
+    background-color: #4b8b7b;
 }
 
 .sidebar-right .sidebar-header {

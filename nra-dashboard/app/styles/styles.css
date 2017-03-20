@@ -145,19 +145,19 @@ a:focus,
 }
 
 .navbar-custom {
-    color: rgb(41, 191, 154);
+    color: rgb(75,139,123);
     background-color: rgb(245, 245, 245);
 }
 
 .navbar-custom a {
-    color: rgb(41, 191, 154);
+    color: rgb(75,139,123);
 }
 
 
 /*Maps*/
 
 .test {
-    border: 1px solid #29BF9A;
+    border: 1px solid #4b8b7b;
 }
 
 #map {
@@ -190,21 +190,34 @@ a:focus,
 /*Text*/
 
 .total-surveys {
-    color: rgb(41, 191, 154);
+    margin-top:-7px;
+    color: rgb(75,139,123);
     font-weight: bolder;
     font-size: 40px;
 }
 
+.content-row {
+    padding-top:20px;
+}
+
+.proportion-surveys{
+    color: rgb(75,139,123);
+    /*font-weight: bolder;*/
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-top: -8px;
+}
+
 .total-survey-label {
     margin-top: -10px;
-    color: rgb(41, 191, 154);
+    color: rgb(75,139,123);
     font-weight: 300;
     font-size: 15px;
     text-transform: uppercase;
 }
 
 .bar-header {
-    color: rgb(41, 191, 154);
+    color: rgb(75,139,123);
     font-weight: 300;
     font-size: 15px;
     text-transform: uppercase;
@@ -233,7 +246,7 @@ a:focus,
     height: 29px;
     overflow: hidden;
     font-family: 'Open Sans', serif;
-    color: rgb(41, 191, 154);
+    color: rgb(75,139,123);
 }
 
 .styled-select select {
@@ -264,7 +277,7 @@ a:focus,
     /*   -webkit-border-radius: 5px;
    -moz-border-radius: 5px;
    border-radius: 5px;*/
-    border-bottom: 1px solid rgb(41, 191, 154);
+    border-bottom: 1px solid rgb(75,139,123);
 }
 
 .blue {
@@ -281,7 +294,7 @@ a:focus,
 
 .modal-header {
     font-family: 'Open Sans', serif;
-    color: rgb(41, 191, 154);
+    color: rgb(75,139,123);
     text-transform: uppercase;
     padding-left: 0;
     border-bottom: 1px solid rgba(41, 191, 154, 0.5);
@@ -293,7 +306,7 @@ a:focus,
 
 .tooltip {
     /*font-family: 'Open Sans', serif;*/
-    color: rgb(41, 191, 154);
+    color: rgb(75,139,123);
     /*padding: 5px 20px;*/
 }
 
@@ -302,14 +315,14 @@ a:focus,
 .custom {
     font-family: 'Open Sans';
     font-size: 10px;
-    border:1px solid rgb(41, 191, 154);
+    border:1px solid rgb(75,139,123);
     /*padding:0;*/
 }
 
 .custom .leaflet-popup-tip,
 .custom .leaflet-popup-content-wrapper {
     background: rgba(245,245,245,1);
-    color: rgb(41, 191, 154);
+    color: rgb(75,139,123);
     border-radius: 0px;
 }
 
@@ -326,7 +339,7 @@ a:focus,
     padding:2px;
     }
 .custom .leaflet-popup-tip {
-    border:1px solid rgb(41, 191, 154);
+    border:1px solid rgb(75,139,123);
     
     width: 10px;
     height: 10px;

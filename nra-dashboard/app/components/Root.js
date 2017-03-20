@@ -113,7 +113,7 @@ var Root = React.createClass({
 
     render: function() {
         if (this.state.data.success != 1) {
-            return( <div className = "center-div"><Loading type='bars' color='#31BF9A' /></div>)
+            return( <div className = "center-div"><Loading type='bars' color='#4b8b7b' /></div>)
         } else {
 
             return (
