@@ -145,19 +145,19 @@ a:focus,
 }
 
 .navbar-custom {
-    color: rgb(75,139,123);
+    color: rgb(68, 132, 206);
     background-color: rgb(245, 245, 245);
 }
 
 .navbar-custom a {
-    color: rgb(75,139,123);
+    color: rgb(68, 132, 206);
 }
 
 
 /*Maps*/
 
 .test {
-    border: 1px solid #4b8b7b;
+    border: 1px solid rgb(68, 132, 206);
 }
 
 #map {
@@ -191,17 +191,17 @@ a:focus,
 
 .total-surveys {
     margin-top:-7px;
-    color: rgb(75,139,123);
+    color: rgb(68, 132, 206);
     font-weight: bolder;
     font-size: 40px;
 }
 
 .content-row {
-    padding-top:20px;
+    padding-top:25px;
 }
 
 .proportion-surveys{
-    color: rgb(75,139,123);
+    color: rgb(68, 132, 206);
     /*font-weight: bolder;*/
     font-size: 12px;
     text-transform: uppercase;
@@ -210,16 +210,16 @@ a:focus,
 
 .total-survey-label {
     margin-top: -10px;
-    color: rgb(75,139,123);
+    color: rgb(68, 132, 206);
     font-weight: 300;
     font-size: 15px;
     text-transform: uppercase;
 }
 
 .bar-header {
-    color: rgb(75,139,123);
-    font-weight: 300;
-    font-size: 15px;
+    color: rgb(68, 132, 206);
+    font-weight: bold;
+    font-size: 12px;
     text-transform: uppercase;
 }
 
@@ -246,7 +246,7 @@ a:focus,
     height: 29px;
     overflow: hidden;
     font-family: 'Open Sans', serif;
-    color: rgb(75,139,123);
+    color: rgb(68, 132, 206);
 }
 
 .styled-select select {
@@ -277,7 +277,7 @@ a:focus,
     /*   -webkit-border-radius: 5px;
    -moz-border-radius: 5px;
    border-radius: 5px;*/
-    border-bottom: 1px solid rgb(75,139,123);
+    border-bottom: 1px solid rgb(68, 132, 206);
 }
 
 .blue {
@@ -294,7 +294,7 @@ a:focus,
 
 .modal-header {
     font-family: 'Open Sans', serif;
-    color: rgb(75,139,123);
+    color: rgb(68, 132, 206);
     text-transform: uppercase;
     padding-left: 0;
     border-bottom: 1px solid rgba(41, 191, 154, 0.5);
@@ -306,7 +306,7 @@ a:focus,
 
 .tooltip {
     /*font-family: 'Open Sans', serif;*/
-    color: rgb(75,139,123);
+    color: rgb(68, 132, 206);
     /*padding: 5px 20px;*/
 }
 
@@ -315,14 +315,14 @@ a:focus,
 .custom {
     font-family: 'Open Sans';
     font-size: 10px;
-    border:1px solid rgb(75,139,123);
+    border:1px solid rgb(68, 132, 206);
     /*padding:0;*/
 }
 
 .custom .leaflet-popup-tip,
 .custom .leaflet-popup-content-wrapper {
     background: rgba(245,245,245,1);
-    color: rgb(75,139,123);
+    color: rgb(68, 132, 206);
     border-radius: 0px;
 }
 
@@ -339,7 +339,7 @@ a:focus,
     padding:2px;
     }
 .custom .leaflet-popup-tip {
-    border:1px solid rgb(75,139,123);
+    border:1px solid rgb(68, 132, 206);
     
     width: 10px;
     height: 10px;
@@ -400,3 +400,34 @@ a:focus,
 .center-div > svg {
     width: 300;
 }
+
+.info{
+    background-color: rgb(245,245,245,0.8);
+    padding:10px;
+    z-index: 1000000;
+    font-family: 'Open Sans', serif;
+    font-size:10px;
+    color:rgb(68, 132, 206);
+    max-width:150px;
+}
+
+.legend-header{
+    /*text-transform: uppercase;*/
+    font-family: 'Open Sans', serif;
+    font-size:12px;
+    font-weight:bold;
+    /*padding-bottom:5px;*/
+
+} 
+
+.legend-description{
+    /*text-transform: uppercase;*/
+    font-size:10px;
+    font-family: 'Open Sans', serif;
+    margin-top:-2px;
+    line-height: 1em;
+    font-weight:bold;
+    padding-bottom:5px;
+    font-style:italic;
+
+} 

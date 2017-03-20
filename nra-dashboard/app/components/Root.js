@@ -15,7 +15,8 @@ var Root = React.createClass({
                 "stats": {
                     survey_status: {
                         "surveys": "21363",
-                        "surveyors": "200"
+                        "surveyors": "200",
+                        "beneficiaries":312232
                     },
                     "construction_status": {
                         "Completed": "3001",
@@ -50,11 +51,11 @@ var Root = React.createClass({
                         "surveyors": 33
                     },
                     "regionalStats": {
-                        "dolakha$22": 51,
-                        "sindhupalchowk$23": 33,
-                        "nuwakot$28": 45,
-                        "dhading$30": 72,
-                        "gorkha$36": 27
+                        "dolakha$22": 8,
+                        "sindhupalchowk$23": 9,
+                        "nuwakot$28": 12,
+                        "dhading$30": 8,
+                        "gorkha$36": 7
                     }
 
                 },
@@ -70,7 +71,7 @@ var Root = React.createClass({
     },
     onParameterChange(params, callback) {
         FetchData(params).then(function(response) {
-            console.log("Fetched Data", response)
+            // console.log("Fetched Data", response)
             this.setState({
                 data: response.data
             }, callback)
@@ -113,7 +114,7 @@ var Root = React.createClass({
 
     render: function() {
         if (this.state.data.success != 1) {
-            return( <div className = "center-div"><Loading type='bars' color='#4b8b7b' /></div>)
+            return( <div className = "center-div"><Loading type='bars' color='#4484ce' /></div>)
         } else {
 
             return (
