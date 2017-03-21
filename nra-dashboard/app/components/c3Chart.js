@@ -26,7 +26,7 @@ var LineAreaBar = React.createClass({
                 columns: [this.props.columns[1]],
                 type: this.props.chartType,
                 colors: {
-                    yaxis: '#29BF9A'
+                    yaxis: '#4484ce'
                 },
                 labels: {
                     format: function(v, id, i, j) {
@@ -107,7 +107,7 @@ var Bar = React.createClass({
                 }
             },
             color: {
-                pattern: ['#4b8b7b']
+                pattern: ['#4484ce']
             },
             axis: {
                 rotated: true,
@@ -125,7 +125,7 @@ var Bar = React.createClass({
             },
             tooltip: {
                 contents: function(d, defaultTitleFormat, defaultValueFormat, color, index) {
-                    return "<div class='test' style='font-size:10px;padding:10px;background-color:rgb(245,245,245)'><font color='#4b8b7b'>" + labels[d[0].index] + "<br/>" + myValues[d[0].index] + " / " + d[0].value + "% </font></div>";
+                    return "<div class='test' style='font-size:10px;padding:10px;background-color:rgb(245,245,245)'><font color='#4484ce'>" + labels[d[0].index] + "<br/>" + myValues[d[0].index] + " / " + d[0].value + "% </font></div>";
                 }
             },
             size: {

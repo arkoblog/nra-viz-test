@@ -16,7 +16,7 @@ var customStyles = {
 
 var Insights = React.createClass({
     componentWillMount: function() {
-        console.log("My data",this.props.data.stats.survey_status)
+        // console.log("My data",this.props.data.stats.survey_status)
     },
     _formatNumber: function(data) {
         var format = d3.format(",");

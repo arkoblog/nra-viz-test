@@ -5,7 +5,8 @@ var polygons = require('../data/polygons');
 var _ = require('lodash')
 require('../styles/styles.css')
 
-var baseMapUrl = 'http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
+// var baseMapUrl = 'http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
+var baseMapUrl = 'http://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}'
 var currentDistricts = ['nuwakot', 'sindhupalchowk', 'dolakha', 'gorkha', 'dhading']
 
 
@@ -29,7 +30,7 @@ var NepalMap = React.createClass({
         window.addEventListener("resize", this._updateDimensions);
     },
     componentDidUpdate: function() {
-        console.log("componentUpdated");
+        // console.log("componentUpdated");
     },
 
     _updateDimensions: function() {
@@ -60,7 +61,7 @@ var NepalMap = React.createClass({
         var map = this.map = L.map(ReactDOM.findDOMNode(this)).setView([28.207, 85.992], 8);
 
         var baseLayer = L.tileLayer(baseMapUrl, {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors <br> Website developed by <a target = "_blank" href="http://kathmandulivinglabs.org">Kathmandu Living Labs</a>'
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors <br> Website developed by <a target = "_blank" href="http://kathmandulivinglabs.org">Kathmandu Living Labs</a><br/>Imagery from <a target = "_blank" href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a>'
         }).addTo(map);
 
         this._addDistricts();
@@ -71,6 +72,37 @@ var NepalMap = React.createClass({
         var sidebar = L.control.sidebar('sidebar', { position: 'right' }).addTo(map);
         this.props.sidebarOpener(false);
         sidebar.open('home')
+
+        console.log(sidebar)
+        sidebar._sidebar.addEventListener('mouseover', function () {
+            map.dragging.disable();
+        })
+
+        sidebar._sidebar.addEventListener('mouseout', function () {
+            map.dragging.enable();
+        })
+
+
+        var legend = L.control({position: 'bottomleft'});
+
+        legend.onAdd = function (map) {
+
+            var div = L.DomUtil.create('div', 'info legend'),
+                grades = [80, 60, 40, 20, 0],
+                labels = ["More than 80%", "60% to 80%", "40% to 60%",  "20% to 40%", "Less than 20%" ];
+
+
+            // loop through our density intervals and generate a label with a colored square for each interval
+            div.innerHTML += '<div class="legend-description">Percentage of total beneficiaries surveyed</div>'
+            for (var i = 0; i < grades.length; i++) {
+                div.innerHTML +=
+                    '<i class="fa fa-circle"  style = " color: ' + this._getColor(grades[i] + 1) + '" aria-hidden="true"></i> '+ labels[i] + '<br/>';
+            }
+            // console.log(div)
+            return div;
+        }.bind(this);
+
+        legend.addTo(map);
 
         map.on('zoomend', function() {
             if (map.getZoom() < 8) {
@@ -97,7 +129,7 @@ var NepalMap = React.createClass({
     },
 
     _highlightFeature: function(e) {
-            console.log(e.target.feature.properties.name)
+            // console.log(e.target.feature.properties.name)
         var customStyles = {
             'maxWidth': '300',
             'className' : 'custom',
@@ -116,7 +148,7 @@ var NepalMap = React.createClass({
 
         layer.setStyle({
             weight: 2,
-            color: '#005934',
+            color: 'rgba(0,0,0,0.7)',
             dashArray: '0',
             fillOpacity: 0.8
         });
@@ -254,7 +286,7 @@ var NepalMap = React.createClass({
                         newLayer._layers[key].options[styleKey] = newStyle[styleKey]
                     }
                 }
-                console.log("MyNew",newLayer)
+                // console.log("MyNew",newLayer)
                 newLayer.addTo(this.map);
                 break;
             default:
@@ -307,17 +339,17 @@ var NepalMap = React.createClass({
     },
     _getColor: function(d, type) {
         if (type == "district") {
-            return d > 80 ? '#043d2e' :
-                d > 60 ? '#155948' :
-                d > 40 ? '#2a715f' :
-                d > 20 ? '#4b8b7b' :
-                '#75a79b';
+            return d > 80 ? '#0b4fa1' :
+                d > 60 ? '#2b6bc0' :
+                d > 40 ? '#4483ce' :
+                d > 20 ? '#679cdc' :
+                '#95bceb';
         } else {
-            return d > 80 ? '#043d2e' :
-                d > 60 ? '#155948' :
-                d > 40 ? '#2a715f' :
-                d > 20 ? '#4b8b7b' :
-                '#75a79b';
+            return d > 80 ? '#0b4fa1' :
+                d > 60 ? '#2b6bc0' :
+                d > 40 ? '#4483ce' :
+                d > 20 ? '#679cdc' :
+                '#95bceb';
         }
 
 
