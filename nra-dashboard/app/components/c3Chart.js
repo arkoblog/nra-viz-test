@@ -5,7 +5,7 @@ var c3 = require('c3');
 var _ = require('lodash')
 
 var chartHeight = screen.height * 0.25;
-var modalChartHeight = screen.height * 0.45;
+var modalChartHeight = screen.height * .5;
 
 var Bar = React.createClass({
     componentWillMount: function() {
@@ -113,6 +113,10 @@ var modalMultipleBar = React.createClass({
         }
         return (arr)
     },
+    _getTitles: function(data, i) {
+        var titles = Object.keys(data)
+        return titles[i]
+    },
     _prepareKeys: function(data) {
         for (var item in data) {
             var arr = []
@@ -144,58 +148,67 @@ var modalMultipleBar = React.createClass({
     _updateChart: function() {
         var myValues = this._prepareValues(this.props.data)
         c3.generate({
-        bindto: '#' + this.props.id,
-          data: {
-            y: "x-axis",
-            json: this._prepareData(this.props.data),
-            labels: {
-              format: function(v, id, i, j) {
-                var myVals=myValues[i]
-                if (j) {
-                    var label = myVals[j]
-                } else  {
-                    var start = 0
-                    var label = myValues[start][0]
-                }
-                return this._prepareKeys(this.props.data)[j] + " / " + v + "% / " + label ;
-              }.bind(this),
-              // + " / " + myValues[i]  
-            },
-            // etc etc
-            keys: {
-              y: "x-axis",
-              value: this._prepareKeys(this.props.data)
-            },
+            bindto: '#' + this.props.id,
+            data: {
+                y: "x-axis",
+                json: this._prepareData(this.props.data),
+                labels: {
+                    format: function(v, id, i, j) {
+                        var myVals = myValues[i]
+                        if (j) {
+                            var label = myVals[j]
+                        } else {
+                            var start = 0
+                            var label = myValues[start][0]
+                        }
+                        return v + "% / " + this._prepareKeys(this.props.data)[j];
+                    }.bind(this),
+                    // + " / " + myValues[i]  
+                },
+                // etc etc
+                keys: {
+                    y: "x-axis",
+                    value: this._prepareKeys(this.props.data)
+                },
 
-            type: 'bar'
-          },
-          color: {
-            pattern: ['#4484ce', '#2b6bc0', '#4483ce', '#679cdc', '#95bceb']
-          },
-          axis: {
-            rotated: true,
-            x: {
-              show: false,
-              type: 'category'
+                type: 'bar'
             },
-            y: {
-              show: false,
-              max: 100
-            }
-          },
-          legend: {
-            show: false
-          },
-          tooltip: {
-            show: false
-          },
-          size: {
+            color: {
+                pattern: ['#4484ce', '#2b6bc0', '#4483ce', '#679cdc', '#4483ce']
+            },
+            axis: {
+                rotated: true,
+                x: {
+                    show: false,
+                    type: 'category'
+                },
+                y: {
+                    show: false,
+                    max: 100
+                }
+            },
+            legend: {
+                show: false
+            },
+            tooltip: {
+                show: true,
+                  format: {
+                    title: function (x) { return this._getTitles(this.props.data, x) }.bind(this),
+                    value: function (value, ratio, id, index) { 
+                        // console.log(value, ratio, id, index)
+                        var number = this.props.data[this._getTitles(this.props.data, index)].stats[id]
+                        return number+" ("+ value + "%)"; }.bind(this)
+                  }
+            },
+            size: {
                 height: modalChartHeight
-          }
+            }
         });
     },
     render() {
-        return <div id = { this.props.id } className = ""ref = "refName" > </div>;
+        return <div id = { this.props.id }
+        className = ""
+        ref = "refName" > < /div>;
     }
 });
 
@@ -276,7 +289,7 @@ var modalSingleBar = React.createClass({
         style = {
             { "height": "100%", "width": "100%" }
         }
-        ref = "refName" > </div>;
+        ref = "refName" > < /div>;
     }
 });
 

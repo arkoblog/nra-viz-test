@@ -15,34 +15,15 @@ var fetchData = function(params) {
 }
 
 
-// var fetchData1 = {
-//     getChart: function(params) {
-//         var myInsights = fetchChartData(params);
-//         return axios.all([myInsights])
-//             .then(function(response) {
-//                 var array = response[0].data[0].data;
-//                 if (response[0].data[0].data.installment_status.length == 2) {
-//                     array.installment_status.push({ "title": "dummy", "value": 0 })
-//                 }
-//                 return (array)
-//             }).catch(function(err) {
-//                 console.warn('Error in getChart:', err)
-//             })
-//     },
-//     getMapAttributes: function(params) {
-//         var myAttributes = fetchMapAttributes(params);
-//         return axios.all([myAttributes])
-//             .then(function(response) {
-//                 return response[0].data[0].data;
-//             }).catch(function(err) {
-//                 console.warn('Error in getChart:', err)
-//             })
-
-//     }
-
-// }
+var fetchModalData = function(params) {
+    return axios({
+        method: 'get',
+        url: rootURL + '/data',
+        params: params
+    })
+}
 
 
 
-
-module.exports = fetchData;
+module.exports = {fetchData:fetchData,
+fetchModalData: fetchModalData};

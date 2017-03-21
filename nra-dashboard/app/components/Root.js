@@ -5,7 +5,7 @@ var axios = require('axios')
 var Sidebar = require('./Sidebar')
 var FetchData = require('../utils/FetchData')
 var Loading = require('react-loading');
-var Update = require('../utils/Update')
+var Update = require('../utils/Update');
 require("../styles/styles.css")
 
 var Root = React.createClass({
@@ -72,7 +72,7 @@ var Root = React.createClass({
         }
     },
     onParameterChange(params, callback) {
-        FetchData(params).then(function(response) {
+        FetchData.fetchData(params).then(function(response) {
             // console.log("Fetched Data", response)
 
             this.setState({
@@ -117,7 +117,11 @@ var Root = React.createClass({
             vdc: newParams.vdc
         }
 
-        this.onParameterChange(params, callback)
+        this.setState({
+            filterParams:params
+        }, this.onParameterChange(params, callback))
+
+        
     },
 
     render: function() {
@@ -130,7 +134,7 @@ var Root = React.createClass({
                         <Nav/>
                         <Update config ={this.state.updaterConfig}>
                         <NepalMap config = {this.state.updaterConfig} data = {this.state.data} onSelectionUpdate={this.onSelectionUpdate} sidebarOpener={this.sidebarOpener}> 
-                        <Sidebar data={this.state.data} header={this.state.header}/> </NepalMap>
+                        <Sidebar locationParams = {this.state.filterParams} data={this.state.data} header={this.state.header}/> </NepalMap>
                         </Update>
                 </div>
             )
