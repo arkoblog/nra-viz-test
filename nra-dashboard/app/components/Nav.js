@@ -14,7 +14,7 @@ var Nav = React.createClass({
             <nav className="navbar navbar-custom">
 				<div className="container-fluid">
 					<div className="navbar-header">
-						<a className="navbar-brand" href="#"><strong>Housing Reconstruction Assessment</strong> | Dashboard</a>
+						<a className="navbar-brand" href="#"><span className= "bold">Housing Reconstruction Assessment |</span> <span className="dashboard-text"> Dashboard</span></a>
 					</div>
 				</div>
 			</nav>

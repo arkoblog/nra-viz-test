@@ -81,7 +81,7 @@ var Bar = React.createClass({
         this._updateChart();
     },
     _chartHeight: function() {
-        chartHeight = screen.height * 0.10;
+        chartHeight = screen.height * 0.1;
         var length = Object.keys(this.props.percentageData).length
         chartHeight = chartHeight * length / 3
     },
@@ -134,7 +134,7 @@ var Bar = React.createClass({
         });
     },
     render() {
-        return <div id={this.props.id} className="" ref="refName" ></div>;
+        return <div id={this.props.id} className=""  style={{"height": "100%","width": "100%"}} ref="refName" ></div>;
     }
 });
 

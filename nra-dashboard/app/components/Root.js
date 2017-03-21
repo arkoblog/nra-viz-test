@@ -5,11 +5,13 @@ var axios = require('axios')
 var Sidebar = require('./Sidebar')
 var FetchData = require('../utils/FetchData')
 var Loading = require('react-loading');
+var Update = require('../utils/Update')
 require("../styles/styles.css")
 
 var Root = React.createClass({
     getInitialState: function() {
         return {
+            updaterConfig: { opacity: 1, allowPointer: "auto" },
             data: {
                 "success": 0,
                 "stats": {
@@ -72,8 +74,11 @@ var Root = React.createClass({
     onParameterChange(params, callback) {
         FetchData(params).then(function(response) {
             // console.log("Fetched Data", response)
+
             this.setState({
+                updaterConfig: { opacity: 1, allowPointer: "auto" },
                 data: response.data
+
             }, callback)
         }.bind(this))
     },
@@ -94,6 +99,9 @@ var Root = React.createClass({
     },
     onSelectionUpdate: function(newParams, callback) {
         // console.log("Updated Parameters",newParams);
+        this.setState({
+            updaterConfig: { opacity: 0.4, allowPointer: "none" }
+        })
         if (newParams.district == "*") {
             this.setState({
                 header: "All Districts".toUpperCase()
@@ -119,9 +127,11 @@ var Root = React.createClass({
 
             return (
                 <div>
-    					<Nav/>
-                        <NepalMap data = {this.state.data} onSelectionUpdate={this.onSelectionUpdate} sidebarOpener={this.sidebarOpener}> 
+                        <Nav/>
+                        <Update config ={this.state.updaterConfig}>
+                        <NepalMap config = {this.state.updaterConfig} data = {this.state.data} onSelectionUpdate={this.onSelectionUpdate} sidebarOpener={this.sidebarOpener}> 
                         <Sidebar data={this.state.data} header={this.state.header}/> </NepalMap>
+                        </Update>
                 </div>
             )
         }

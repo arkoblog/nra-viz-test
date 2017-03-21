@@ -29,7 +29,7 @@ var Insights = React.createClass({
                 <div className="content-row col-md-12 col-lg-12 col-sm-12">
                     <div className="row-fluid bar-header">total beneficiaries surveyed</div>
                     <div className="row-fluid total-surveys">{this.props.data.stats.survey_status.surveys}</div>
-                    <div className="row-fluid proportion-surveys">out of {this._formatNumber(this.props.data.stats.survey_status.beneficiaries)} beneficiaries</div>
+                    <div className="row-fluid proportion-surveys">out of {this._formatNumber(this.props.data.stats.survey_status.beneficiaries)} / {((this.props.data.stats.survey_status.surveys/this.props.data.stats.survey_status.beneficiaries)*100).toFixed(0)}% of total</div>
                 </div>
 
                 <div className="content-row col-md-12 col-lg-12 col-sm-12">

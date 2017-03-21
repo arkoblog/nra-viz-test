@@ -19,7 +19,7 @@ var Sidebar = React.createClass({
 			        </div>
 
 			        <div className="sidebar-content">
-			            <div className="sidebar-pane" id="home">
+			            <div className="sidebar-pane " id="home">
 			                <h1 className="sidebar-header">
 			                    <span className="sidebar-close"><i className="fa fa-remove"></i></span>
 			                	{this.props.header}

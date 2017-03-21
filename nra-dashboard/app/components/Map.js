@@ -3,7 +3,8 @@ var ReactDOM = require('react-dom')
 var L = require('leaflet');
 var polygons = require('../data/polygons');
 var _ = require('lodash')
-require('../styles/styles.css')
+
+require('../styles/styles.css');
 
 // var baseMapUrl = 'http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
 var baseMapUrl = 'http://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}'
@@ -27,9 +28,11 @@ var NepalMap = React.createClass({
     },
     componentDidMount: function() {
         this._loadMap();
+        // this.map.spin(true)
         window.addEventListener("resize", this._updateDimensions);
     },
     componentDidUpdate: function() {
+
         // console.log("componentUpdated");
     },
 
@@ -73,7 +76,7 @@ var NepalMap = React.createClass({
         this.props.sidebarOpener(false);
         sidebar.open('home')
 
-        console.log(sidebar)
+        // console.log(sidebar)
         sidebar._sidebar.addEventListener('mouseover', function () {
             map.dragging.disable();
         })
@@ -96,7 +99,7 @@ var NepalMap = React.createClass({
             div.innerHTML += '<div class="legend-description">Percentage of total beneficiaries surveyed</div>'
             for (var i = 0; i < grades.length; i++) {
                 div.innerHTML +=
-                    '<i class="fa fa-circle"  style = " color: ' + this._getColor(grades[i] + 1) + '" aria-hidden="true"></i> '+ labels[i] + '<br/>';
+                    '<i class="legend-icon fa fa-circle"  style = " color: ' + this._getColor(grades[i] + 1) + '" aria-hidden="true"></i>   '+ labels[i] + '<br/>';
             }
             // console.log(div)
             return div;
@@ -136,26 +139,29 @@ var NepalMap = React.createClass({
             'closeButton' : false,
             'maxHeight':'20'
         }    
+        
+        if(this.props.config.allowPointer == "auto") {
+            var popup = L.popup(customStyles)
+               .setLatLng(e.target.getCenter()) 
+               .setContent("<div class=''>"+ e.target.feature.properties.name.toUpperCase()+" / " + e.target.feature.properties.completion+  "% COMPLETE</div>")
+               .openOn(this.map);
 
-        var popup = L.popup(customStyles)
-           .setLatLng(e.target.getCenter()) 
-           .setContent("<div class=''>"+ e.target.feature.properties.name.toUpperCase()+" / " + e.target.feature.properties.completion+  "% COMPLETE</div>")
-           .openOn(this.map);
+              // e.target.bindPopup().addTo(this.map)
+            // console.log("moseOver")
+            var layer = e.target;
 
-          // e.target.bindPopup().addTo(this.map)
-        // console.log("moseOver")
-        var layer = e.target;
+            layer.setStyle({
+                weight: 2,
+                color: 'rgba(0,0,0,0.7)',
+                dashArray: '0',
+                fillOpacity: 0.8
+            });
 
-        layer.setStyle({
-            weight: 2,
-            color: 'rgba(0,0,0,0.7)',
-            dashArray: '0',
-            fillOpacity: 0.8
-        });
+            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                layer.bringToFront();
+            }
 
-        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-            layer.bringToFront();
-        }
+        } 
     },
 
     _resetHighlight: function(e) {
@@ -205,45 +211,48 @@ var NepalMap = React.createClass({
 
     _zoomToFeature: function(e) {
         // console.log(e.target.feature)
+        if(this.props.config.allowPointer == "auto") {
+            if (e.target.feature.properties.type) {
+                var selectedDistrict = e.target.feature.properties.name.toLowerCase()
+                var districtCode = String(e.target.feature.properties.DIST_ID)
+                var districtName = String(e.target.feature.properties.name)
 
-        if (e.target.feature.properties.type) {
-            var selectedDistrict = e.target.feature.properties.name.toLowerCase()
-            var districtCode = String(e.target.feature.properties.DIST_ID)
-            var districtName = String(e.target.feature.properties.name)
+
+                // Reset state Variables
+                var newParams = {};
+                newParams.district = districtCode;
+                newParams.vdc = "*"
+                newParams.name = districtName
+                
+                this.map.setView(e.target.getCenter(), 9)
 
 
-            // Reset state Variables
-            var newParams = {};
-            newParams.district = districtCode;
-            newParams.vdc = "*"
-            newParams.name = districtName
+                this.setState({
+                    isDistrictClicked: true,
+                    selectedDistrict: selectedDistrict
+                })
+
+                this.props.onSelectionUpdate(newParams, this._afterFetchData);
+                // console.log("data updated")
+                // this._removeLayers()
+                // this._addLayer(selectedDistrict, "vdc");
+                // this._addRemainingDistricts(selectedDistrict);
+
+            } else {
+                var districtCode = String(e.target.feature.properties.DIST_ID)
+                var vdcCode = String(e.target.feature.properties.code)
+                var vdcName = String(e.target.feature.properties.name)
+
+                var newParams = {};
+                newParams.district = districtCode;
+                newParams.vdc = vdcCode;
+                newParams.name = vdcName;
+
+                this.props.onSelectionUpdate(newParams, this._afterFetchData);
+            }
             
-            this.map.setView(e.target.getCenter(), 9)
-
-
-            this.setState({
-                isDistrictClicked: true,
-                selectedDistrict: selectedDistrict
-            })
-
-            this.props.onSelectionUpdate(newParams, this._afterFetchData);
-            // console.log("data updated")
-            // this._removeLayers()
-            // this._addLayer(selectedDistrict, "vdc");
-            // this._addRemainingDistricts(selectedDistrict);
-
-        } else {
-            var districtCode = String(e.target.feature.properties.DIST_ID)
-            var vdcCode = String(e.target.feature.properties.code)
-            var vdcName = String(e.target.feature.properties.name)
-
-            var newParams = {};
-            newParams.district = districtCode;
-            newParams.vdc = vdcCode;
-            newParams.name = vdcName;
-
-            this.props.onSelectionUpdate(newParams, this._afterFetchData);
         }
+
     },
     _addLayer: function(id, level) {
         var layers = {
