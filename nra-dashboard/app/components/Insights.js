@@ -42,14 +42,13 @@ var Insights = React.createClass({
 
                 <div className="content-row col-md-12 col-lg-12 col-sm-12 ">
                     <div className="row-fluid bar-header">status of construction</div>
-                    <a className="more">Learn More >></a>
+                    <a onClick={() => this.props.modalOpener("construction")}  className="more">Learn More >></a>
                     <div className="row-fluid  "><Chart.Bar id="chart1" percentageData = {this.props.data.percentageStats.construction_status} values = {this.props.data.stats.construction_status}/></div>
                 </div>
 
                 <div className="content-row col-md-12 col-lg-12 col-sm-12">
                     <div className="row-fluid bar-header">Applied for second installment?</div>
-                    <a className="more">Learn More >>
-                    </a>
+                    <a onClick={() => this.props.modalOpener("installment")}  className="more">Learn More >></a>
                     <div className="row-fluid ">
                     <Chart.Bar id="chart2" percentageData= {this.props.data.percentageStats.installment_status} values = {this.props.data.stats.installment_status}/>
                     </div>

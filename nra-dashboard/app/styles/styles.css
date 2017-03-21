@@ -231,8 +231,19 @@ a:focus,
     font-weight: bold;
     font-size: 12px;
     text-transform: uppercase;
+
 }
 
+.modal-header {
+    color: rgb(68, 132, 206);
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-family: 'Open Sans', serif;
+    border:none;
+    margin-top:-8px;
+    
+}
 
 /*Links*/
 
@@ -256,13 +267,14 @@ a:focus,
     height: 29px;
     overflow: hidden;
     font-family: 'Open Sans', serif;
+    /*font-size:10px;*/
     color: rgb(68, 132, 206);
 }
 
 .styled-select select {
     background: transparent;
     border: none;
-    font-size: 14px;
+    font-size: 12px;
     height: 29px;
     padding: 0px;
     /* If you add too much padding here, the options won't show in IE */
@@ -291,7 +303,7 @@ a:focus,
 }
 
 .blue {
-    background-color: rgba(41, 191, 154, 0.1);
+    background-color: rgba(11, 79, 161, 0.1);
 }
 
 .slight-padding {
@@ -302,14 +314,6 @@ a:focus,
     border-left: 1px dashed rgba(41, 191, 154, 0.5);
 }
 
-.modal-header {
-    font-family: 'Open Sans', serif;
-    color: rgb(68, 132, 206);
-    text-transform: uppercase;
-    padding-left: 0;
-    border-bottom: 1px solid rgba(41, 191, 154, 0.5);
-    /*font-size: 30px;*/
-}
 
 
 /*Charts*/
@@ -323,6 +327,7 @@ a:focus,
 .c3-text{
     font-size: 10px;
     font-family: 'Open Sans', serif;
+    
 }
 /*Zoom buttons*/
  .leaflet-control-zoom  {
@@ -331,7 +336,9 @@ a:focus,
 
 /* popup */
 
-
+.secondary-chart {
+    margin-left:-150px;
+}
 
 .custom {
     font-family: 'Open Sans';

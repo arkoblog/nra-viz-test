@@ -5,58 +5,7 @@ var c3 = require('c3');
 var _ = require('lodash')
 
 var chartHeight = screen.height * 0.25;
-var modalchartHeight = screen.height * 0.5;
-
-var LineAreaBar = React.createClass({
-    componentWillMount: function() {
-        this._updateChart();
-    },
-    componentDidMount: function() {
-        this._updateChart();
-    },
-    componentDidUpdate: function() {
-        this._updateChart();
-    },
-    _updateChart: function() {
-        var labels = this.props.columns[0]
-            // console.log("MyColumns", this.props.columns[0])
-        c3.generate({
-            bindto: '#' + this.props.id,
-            data: {
-                columns: [this.props.columns[1]],
-                type: this.props.chartType,
-                colors: {
-                    yaxis: '#4484ce'
-                },
-                labels: {
-                    format: function(v, id, i, j) {
-                        return labels[i] == "" ? "" : labels[i] + " / " + v + "%" },
-                }
-            },
-            axis: {
-                x: {
-                    show: false
-                },
-                y: {
-                    show: false
-                },
-                rotated: true
-            },
-            legend: {
-                show: false
-            },
-            tooltip: {
-                show: false
-            },
-            size: {
-                height: chartHeight
-            }
-        });
-    },
-    render() {
-        return <div id={this.props.id} ref="refName" ></div>;
-    }
-});
+var modalChartHeight = screen.height * 0.45;
 
 var Bar = React.createClass({
     componentWillMount: function() {
@@ -102,7 +51,8 @@ var Bar = React.createClass({
                 type: "bar",
                 labels: {
                     format: function(v, id, i, j) {
-                        return labels[i] == "dummy" ? "" : labels[i] + " / " + v + "%" },
+                        return labels[i] == "dummy" ? "" : labels[i] + " / " + v + "%"
+                    },
                     // + " / " + myValues[i]  
                 }
             },
@@ -134,14 +84,56 @@ var Bar = React.createClass({
         });
     },
     render() {
-        return <div id={this.props.id} className=""  style={{"height": "100%","width": "100%"}} ref="refName" ></div>;
+        return <div id = { this.props.id }
+        className = ""
+        style = {
+            { "height": "100%", "width": "100%" }
+        }
+        ref = "refName" > </div>;
     }
 });
 
-
-var StackedBar = React.createClass({
+var modalMultipleBar = React.createClass({
     componentWillMount: function() {
         this._updateChart();
+    },
+    _prepareData: function(data) {
+        var arr = [];
+
+        for (var item in data) {
+            var obj = {}
+
+            obj["axis"] = item
+            for (var i in data[item].percentageStats) {
+                obj[i] = data[item].percentageStats[i]
+            }
+
+            arr.push(obj)
+
+        }
+        return (arr)
+    },
+    _prepareKeys: function(data) {
+        for (var item in data) {
+            var arr = []
+            for (var i in data[item].percentageStats) {
+                arr.push(i)
+            }
+        }
+
+        return arr;
+    },
+    _prepareValues: function(data) {
+        var arr = [];
+        for (var item in data) {
+            var seconarr = [];
+            for (var i in data[item].stats) {
+                seconarr.push(data[item].stats[i])
+            }
+            arr.push(seconarr);
+        }
+        return arr
+
     },
     componentDidMount: function() {
         this._updateChart();
@@ -150,52 +142,78 @@ var StackedBar = React.createClass({
         this._updateChart();
     },
     _updateChart: function() {
-        // console.log("MyColumns", this.props.columns[0])
+        var myValues = this._prepareValues(this.props.data)
         c3.generate({
-            bindto: '#' + this.props.id,
-            data: {
-                columns: [
-                    ['data1', 25],
-                    ['data2', 65],
-                    ['data3', 10]
-                ],
-                type: this.props.chartType,
-                colors: {
-                    yaxis: '#29BF9A'
-                },
-                groups: [
-                    ['data1', 'data2', 'data3']
-                ],
-                labels: true
+        bindto: '#' + this.props.id,
+          data: {
+            y: "x-axis",
+            json: this._prepareData(this.props.data),
+            labels: {
+              format: function(v, id, i, j) {
+                var myVals=myValues[i]
+                if (j) {
+                    var label = myVals[j]
+                } else  {
+                    var start = 0
+                    var label = myValues[start][0]
+                }
+                return this._prepareKeys(this.props.data)[j] + " / " + v + "% / " + label ;
+              }.bind(this),
+              // + " / " + myValues[i]  
             },
-            axis: {
-                x: {
-                    show: false
-                },
-                y: {
-                    show: false
-                },
-                rotated: true
+            // etc etc
+            keys: {
+              y: "x-axis",
+              value: this._prepareKeys(this.props.data)
             },
-            legend: {
-                show: true
+
+            type: 'bar'
+          },
+          color: {
+            pattern: ['#4484ce', '#2b6bc0', '#4483ce', '#679cdc', '#95bceb']
+          },
+          axis: {
+            rotated: true,
+            x: {
+              show: false,
+              type: 'category'
             },
-            tooltip: {
-                show: false
-            },
-            size: {
-                height: chartHeight
+            y: {
+              show: false,
+              max: 100
             }
+          },
+          legend: {
+            show: false
+          },
+          tooltip: {
+            show: false
+          },
+          size: {
+                height: modalChartHeight
+          }
         });
     },
     render() {
-        return <div id={this.props.id} ref="refName" ></div>;
+        return <div id = { this.props.id } className = ""ref = "refName" > </div>;
     }
 });
 
-var ClusteredColumn = React.createClass({
+var modalSingleBar = React.createClass({
     componentWillMount: function() {
         this._updateChart();
+    },
+    _formatData: function(data) {
+        var formattedData = []
+        _.forEach(data, function(value, key) {
+            var emptyObject = {}
+            emptyObject.title = key;
+            emptyObject.value = value;
+            emptyObject.percentage = Number(this.props.values[key])
+            formattedData.push(emptyObject)
+
+        }.bind(this))
+        return formattedData;
     },
     componentDidMount: function() {
         this._updateChart();
@@ -203,103 +221,68 @@ var ClusteredColumn = React.createClass({
     componentDidUpdate: function() {
         this._updateChart();
     },
+
     _updateChart: function() {
-        // console.log("MyColumns", this.props.columns[0])
+        var myChartData = this._formatData(this.props.percentageData);
+        var myValues = _.values(this.props.values)
+        var labels = _.map(myChartData, "title")
+
         c3.generate({
             bindto: '#' + this.props.id,
             data: {
-                columns: this.props.data,
-                type: this.props.chartType,
-                colors: {
-                    yaxis: '#29BF9A'
+                json: myChartData,
+                keys: {
+                    x: 'title', // it's possible to specify 'x' when category axis
+                    value: ['value'],
                 },
-
-                labels: true
-                    //         labels: {
-                    //            format: function (v, id, i, j) { return labels[i]==""? "" : labels[i] + " / "+v + "%"},
-                    // //             format: {
-                    // //                 data1: d3.format('$'),
-                    // // //                data1: function (v, id, i, j) { return "Format for data1"; },
-                    // //             }
-                    //         } 
-            },
-            axis: {
-                x: {
-                    show: false
-                },
-                y: {
-                    show: false
-                },
-                rotated: true
+                type: "bar",
+                labels: {
+                    format: function(v, id, i, j) {
+                        return labels[i] == "dummy" ? "" : labels[i] + " / " + v + "%"
+                    },
+                    // + " / " + myValues[i]  
+                }
             },
             color: {
-                pattern: ['#29BF9A', '#2B8779', '#195148']
-            },
-            legend: {
-                show: true
-            },
-            tooltip: {
-                show: false
-            },
-            size: {
-                height: modalchartHeight
-            }
-        });
-    },
-    render() {
-        return <div id={this.props.id} ref="refName" ></div>;
-    }
-});
-
-var Scatter = React.createClass({
-    componentDidMount: function() {
-        this._updateChart();
-    },
-    componentDidUpdate: function() {
-        this._updateChart();
-    },
-    _updateChart: function() {
-        // console.log("MyColumns", this.props.columns)
-        chart = c3.generate({
-            bindto: '#' + this.props.id,
-            data: {
-                x: this.props.columns[0][0],
-                columns: this.props.columns,
-                type: 'scatter',
-                labels: {
-                    //            format: function (v, id, i, j) { return "Default Format"; },
-                    format: function(v, id, i, j) {
-                        return d3.round(v, 2);
-                        //                data1: function (v, id, i, j) { return "Format for data1"; },
-                    }
-                }
-            },
-            point: {
-                r: 10
+                pattern: ['#4484ce']
             },
             axis: {
+                rotated: true,
                 x: {
-                    label: this.props.columns[0][0],
-                    tick: {
-                        fit: false
-                    }
+                    show: false,
+                    type: 'category'
                 },
                 y: {
-                    label: this.props.columns[1][0]
+                    show: false,
+                    max: 100
                 }
+            },
+            legend: {
+                show: false
+            },
+            tooltip: {
+                contents: function(d, defaultTitleFormat, defaultValueFormat, color, index) {
+                    return "<div class='test' style='font-size:10px;padding:10px;background-color:rgb(245,245,245); margin-left:400px;'><font color='#4484ce'>" + labels[d[0].index] + "<br/>" + myValues[d[0].index] + " / " + d[0].value + "% </font></div>";
+                }
+            },
+            size: {
+                height: modalChartHeight
             }
         });
     },
     render() {
-        return <div id={this.props.id} ></div>;
+        return <div id = { this.props.id }
+        className = ""
+        style = {
+            { "height": "100%", "width": "100%" }
+        }
+        ref = "refName" > </div>;
     }
 });
 
 
 module.exports = {
-    LineAreaBar: LineAreaBar,
-    Scatter: Scatter,
-    StackedBar: StackedBar,
-    ClusteredColumn: ClusteredColumn,
-    Bar: Bar
+    Bar: Bar,
+    modalSingleBar: modalSingleBar,
+    modalMultipleBar: modalMultipleBar
 };
