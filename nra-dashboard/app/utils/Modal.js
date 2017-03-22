@@ -32,7 +32,7 @@ var Modal = React.createClass({
 	      left: '0px',
 	      zIndex: '9998',
 	      background: 'rgba(0, 0, 0, 0.3)'
-	    }
+	      }
 
 
 		return (

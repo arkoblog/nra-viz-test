@@ -23,7 +23,17 @@ var fetchModalData = function(params) {
     })
 }
 
+var fetchModalData2 = function(params) {
+    return axios({
+        method: 'get',
+        url: rootURLActual + '/api/v1/mis/assessment/queries',
+        params: params
+    })
+}
 
+// fetchModalData2({   "district":"*","vdc" : "*","assessmentId" : "1"}).then(function(response){
+//     console.log(response)
+// })
 
 module.exports = {fetchData:fetchData,
-fetchModalData: fetchModalData};
+fetchModalData: fetchModalData2};

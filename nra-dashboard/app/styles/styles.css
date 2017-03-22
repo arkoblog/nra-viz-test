@@ -348,11 +348,25 @@ a:focus,
 
 }
 
+.c3-region.region1 {
+  /*fill: #0b4fa1;*/
+  /*border:1px solid #000;*/
+}
+
+.c3-region.region2 {
+  /*fill: #4483ce;*/
+}
+/*.c3-region.region3 {
+  fill: blue;
+}*/
 /*Zoom buttons*/
  .leaflet-control-zoom  {
   border-radius: 0px;
 }
 
+.single-chart {
+    margin-top:4px;
+}
 /* popup */
 
 .secondary-chart {
