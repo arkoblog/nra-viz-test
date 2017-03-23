@@ -42,6 +42,7 @@ var Sidebar = React.createClass({
 			        <div className="sidebar-tabs ">
 			            <ul role="tablist">
 			                <li><a href="#home" role="tab"><i className="fa fa-area-chart"></i></a></li>
+			                <li><a href="#info" role="tab"><i className="fa fa-info-circle"></i></a></li>
 			            </ul>
 
 
@@ -54,6 +55,26 @@ var Sidebar = React.createClass({
 			                	{this.props.header}
 			                </h1>
 								<Insights modalOpener={this._openModal} data={this.props.data}/>
+			            </div>
+			            <div className="sidebar-pane " id="info">
+			                <h1 className="sidebar-header">
+			                    <span className="sidebar-close"><i className="fa fa-remove"></i></span>
+			                	ABOUT THIS TOOL
+			                </h1>
+			                <div className="row-fluid ">
+			                <div className="content-row info-text col-md-12 col-lg-12 col-sm-12 ">
+			                <div className="row-fluid bar-header">WELCOME</div>
+			                <div className="row-fluid info-content">
+			                <p>Nullam vel vulputate massa, vitae mollis tellus. Praesent tristique est id massa consectetur, sed finibus velit cursus. 
+			                	Sed rutrum consectetur vestibulum. Aenean elit leo, placerat imperdiet tincidunt et, efficitur eu lorem. 
+			                	Pellentesque scelerisque, erat ac accumsan vestibulum, mi odio pretium ipsum, at varius diam ante eget augue. Duis quis lacinia libero. 
+			                	Vivamus urna tortor, ultricies et libero ac, pharetra gravida mi. Praesent scelerisque eu libero in congue.</p>
+			                <p>Sed in hendrerit purus. Nam ultrices volutpat leo non rhoncus. Aliquam mollis sem non neque feugiat, facilisis porttitor sem luctus. 
+			                Etiam risus diam, efficitur et erat nec, vulputate tincidunt arcu. Ut in pulvinar mauris, quis placerat lorem. 
+			                Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque varius, nulla eget rhoncus dapibus, lectus velit ultrices tortor, non cursus lorem nulla ut justo.</p>
+			                </div>
+			                </div>
+			                </div>
 			            </div>
 
 			        </div>

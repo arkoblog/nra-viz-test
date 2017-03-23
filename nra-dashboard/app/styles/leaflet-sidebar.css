@@ -97,14 +97,14 @@
 
 .sidebar-tabs > li:hover,
 .sidebar-tabs > ul > li {
-    color: #000;
+    color: #4484ce;
     background-color: #eee;
 }
 
 .sidebar-tabs > li:hover,
 .sidebar-tabs > ul > li:hover {
-    color: #fff;
-    background-color: #4484ce;
+    color: #000;
+    background-color: #eee;
 }
 
 .sidebar-tabs > li.active,

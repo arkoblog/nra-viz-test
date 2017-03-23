@@ -131,7 +131,7 @@ var ModalContent = React.createClass({
                 <div className="row-fluid modal-header">
                     <div className = "row-fluid modal-header">
                         <div className=" col-md-12 col-lg-12 col-sm-12 modal-title modal-header">
-                                            {this.props.header} / {this.props.primaryData.stats.survey_status.surveys} benefeciaries surveyed / {((this.props.primaryData.stats.survey_status.surveys/this.props.primaryData.stats.survey_status.beneficiaries)*100).toFixed(0)}% 
+                                            {this.props.header} / {this.props.primaryData.stats.survey_status.surveys} beneficiaries surveyed / {((this.props.primaryData.stats.survey_status.surveys/this.props.primaryData.stats.survey_status.beneficiaries)*100).toFixed(0)}% of total
                                             <a className="close-button pull-right" onClick={() => this.props.closeModal()}><i className="fa fa-close"></i></a>
                             
                         </div>
@@ -152,6 +152,11 @@ var ModalContent = React.createClass({
                               <option value='{"assessmentId" : "2", "type": "construction"}'>Type of building foundation</option>
                               <option value='{"assessmentId" : "3", "type": "construction"}'>Superstructure of the house</option>
                               <option value='{"assessmentId" : "4", "type": "construction"}'>Roof design</option>
+
+                              <option value='{"assessmentId" : "5", "type": "construction"}'>Source of funding?</option>
+                              <option value='{"assessmentId" : "6", "type": "construction"}'>Were the building codes followed?</option>
+                              <option value='{"assessmentId" : "7", "type": "construction"}'>Why weren't the buiding codes followed?</option>
+                              <option value='{"assessmentId" : "8", "type": "construction"}'>Why has construction not started yet?</option>
                             </select>
                             </div> 
                         <Update config ={this.state.updaterConfig}>
@@ -171,7 +176,7 @@ var ModalContent = React.createClass({
                 <div className="row-fluid modal-header">
                     <div className = "row-fluid modal-header">
                         <div className=" col-md-12 col-lg-12 col-sm-12 modal-title modal-header">
-                                            {this.props.header} / {this.props.primaryData.stats.survey_status.surveys} benefeciaries surveyed / {((this.props.primaryData.stats.survey_status.surveys/this.props.primaryData.stats.survey_status.beneficiaries)*100).toFixed(0)}% 
+                                            {this.props.header} / {this.props.primaryData.stats.survey_status.surveys} beneficiaries surveyed / {((this.props.primaryData.stats.survey_status.surveys/this.props.primaryData.stats.survey_status.beneficiaries)*100).toFixed(0)}% of total
                                             <a className="close-button pull-right" onClick={() => this.props.closeModal()}><i className="fa fa-close"></i></a>
                             
                         </div>

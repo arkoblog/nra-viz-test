@@ -210,6 +210,14 @@ a:focus,
     padding-top:25px;
 }
 
+
+.info-text {
+    font-family: 'Open Sans', serif;
+    font-size:10px;
+    color:rgb(68, 132, 206);
+    max-width:270px;
+}
+
 .proportion-surveys{
     color: rgb(68, 132, 206);
     /*font-weight: bolder;*/
@@ -253,13 +261,24 @@ a:focus,
         border-bottom: 1px solid rgba(68, 132, 206, 0.5);
 }
 
+.leaflet-container {
+    background: rgb(245,245,245);
+}
 /*Links*/
-
-.more {
+.more > a{
     font-family: 'Open Sans', serif;
     font-size: 10px;
+    color: #ff7e35;
+    /*background-color: #F55800;*/
 }
 
+
+.more > a:hover{
+    font-family: 'Open Sans', serif;
+    font-size: 10px;
+    color: #000;
+    cursor:pointer;
+}
 
 /*Modal*/
 
@@ -459,7 +478,7 @@ a:focus,
 
 .center-div {
   position: fixed; /* or absolute */
-  top: 50%;
+  top: 20%;
   left: 50%;
   z-index: 10000000000000;
   /* bring your own prefixes */
@@ -477,7 +496,7 @@ a:focus,
 }
 
 .center-div > svg {
-    width: 300;
+    /*width: 300;*/
 }
 
 .info{
@@ -490,6 +509,8 @@ a:focus,
     max-width:190px;
 }
 
+
+
 .legend-header{
     /*text-transform: uppercase;*/
     font-family: 'Open Sans', serif;
@@ -501,6 +522,20 @@ a:focus,
 
 .legend-icon {
     padding-right:10px;
+    font-size: 20px;
+}
+
+.legend-label {
+    /*vertical-align: text-top;*/
+    position:absolute; 
+    top:50%; 
+    height:10em; 
+    margin-top:-10px
+    /*padding-top:3px;*/
+}
+
+.legend-parent {
+    position:relative;
 }
 
 .legend-description{
@@ -534,4 +569,9 @@ overflow-y: hidden; */
     position:absolute;
     width:100%;
     height:100%;
+}
+
+.info-content p {
+    font-size: 12px;
+    font-family: 'Open Sans', serif;
 }
