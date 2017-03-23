@@ -18,7 +18,7 @@ var Modal = React.createClass({
 	      width:'80%',
 	      top: '50%',
 	      left: '50%',
-	      padding: '30px',
+	      padding: '22px',
 	      transform: 'translate(-50%, -50%)',
 	      zIndex: '9999',
 	      background: 'rgb(245,245,245)'

@@ -1,4 +1,4 @@
-var React=require('react');
+var React = require('react');
 var Chart = require('./c3Chart.js')
 var FetchData = require('../utils/FetchData')
 var Update = require('../utils/Update');
@@ -12,7 +12,7 @@ var ModalContent = React.createClass({
     getInitialState: function() {
         // console.log(this.props)
         return {
-            modalParams: {"assessmentId":"1", district:this.props.locationParams.district, vdc:this.props.locationParams.vdc, type: this.props.modalType},
+            modalParams: { "assessmentId": "1", district: this.props.locationParams.district, vdc: this.props.locationParams.vdc, type: this.props.modalType },
             updaterConfig: { opacity: 0, allowPointer: "none" },
             secondaryData: {
                 "id": 0,
@@ -81,102 +81,67 @@ var ModalContent = React.createClass({
     },
     onParameterChange: function(params) {
         var fetchInitial = FetchData.fetchModalData(params);
-        var fetchInstallment1 = FetchData.fetchModalData({type: "installment", "assessmentId":"1", district : this.props.locationParams.district, vdc: this.props.locationParams.vdc });
-        var fetchInstallment2 = FetchData.fetchModalData({type: "installment", "assessmentId":"2", district : this.props.locationParams.district, vdc: this.props.locationParams.vdc });
-        axios.all([fetchInitial,fetchInstallment1, fetchInstallment2]).then(function(response){
-             // if (this.props.modalType == "construction") {
-                    console.log(response[1].data,response[2].data)
-                    this.setState({
-
-                        secondaryData: response[0].data.assessmentStats,
-                        primaryPercentageData: this.props.primaryData.percentageStats.construction_status,
-                        primaryValues: this.props.primaryData.stats.construction_status,
-                        primaryInstallmentPercentageData: this.props.primaryData.percentageStats.installment_status,
-                        primaryInstallmentValues: this.props.primaryData.stats.construction_status,
-                        chartDataYes: response[1].data.assessmentStats,
-                        chartDataNo: response[2].data.assessmentStats,
-                        updaterConfig: { opacity: 1, allowPointer: "auto" }
+        var fetchInstallment1 = FetchData.fetchModalData({ type: "installment", "assessmentId": "1", district: this.props.locationParams.district, vdc: this.props.locationParams.vdc });
+        var fetchInstallment2 = FetchData.fetchModalData({ type: "installment", "assessmentId": "2", district: this.props.locationParams.district, vdc: this.props.locationParams.vdc });
+        axios.all([fetchInitial, fetchInstallment1, fetchInstallment2]).then(function(response) {
+            this.setState({
+                secondaryData: response[0].data.assessmentStats,
+                primaryPercentageData: this.props.primaryData.percentageStats.construction_status,
+                primaryValues: this.props.primaryData.stats.construction_status,
+                primaryInstallmentPercentageData: this.props.primaryData.percentageStats.installment_status,
+                primaryInstallmentValues: this.props.primaryData.stats.construction_status,
+                chartDataYes: response[1].data.assessmentStats,
+                chartDataNo: response[2].data.assessmentStats,
+                updaterConfig: { opacity: 1, allowPointer: "auto" }
 
 
-                    })
-                // } else if (this.props.modalType == "installment") {
+            })
 
-            }.bind(this))
-
-
-        // FetchData.fetchModalData(params)
-        //     .then(function(response){
-        //         // console.log("My response",response.data)
-        //         if (this.props.modalType == "construction") {
-        //             // console.log(response.data[0])
-        //             this.setState({
-        //                 secondaryData: response.data.assessmentStats,
-        //                 primaryPercentageData: this.props.primaryData.percentageStats.construction_status,
-        //                 primaryValues: this.props.primaryData.stats.construction_status,
-        //                 updaterConfig: { opacity: 1, allowPointer: "auto" }
+        }.bind(this))
 
 
-        //             })
-        //         } else if (this.props.modalType == "installment") {
-        //             if (!this.state.validity) {
-        //                 this.setState({
-        //                     secondaryData: response.data.assessmentStats,
-        //                     primaryPercentageData: this.props.primaryData.percentageStats.installment_status,
-        //                     primaryValues: this.props.primaryData.stats.installment_status,
-        //                     updaterConfig: { opacity: 1, allowPointer: "auto" },
-        //                     validity: "applied"
-
-        //                 })
-                        
-        //             } else {
-        //                 this.setState({
-        //                     secondaryData: response.data.assessmentStats,
-        //                     primaryPercentageData: this.props.primaryData.percentageStats.installment_status,
-        //                     primaryValues: this.props.primaryData.stats.installment_status,
-        //                     updaterConfig: { opacity: 1, allowPointer: "auto" },
-        //                     validity: this.state.validity
-
-        //                 })
-        //             }
-
-        //         }
-        //     }.bind(this))
 
     },
     componentWillMount: function() {
-        // console.log(this.state.modalParams)
-        this.onParameterChange(this.state.modalParams);        // console.log(this.props.primaryData)
+        this.onParameterChange(this.state.modalParams); // console.log(this.props.primaryData)
     },
     _handleChange: function(e) {
         var params = JSON.parse(e.target.value);
         var newParams = {}
-        console.log("Current Myparams",params)
-        
+        // console.log("Current Myparams", params)
+
         newParams.type = params.type;
         newParams.assessmentId = params.assessmentId;
-        newParams.district=this.props.locationParams.district;
-        newParams.vdc=this.props.locationParams.vdc;
+        newParams.district = this.props.locationParams.district;
+        newParams.vdc = this.props.locationParams.vdc;
         this.setState({
             modalParams: newParams,
             updaterConfig: { opacity: 0, allowPointer: "none" },
         }, this.onParameterChange(newParams))
     },
     render: function() {
-        console.log(this.props.modalType)
+        // console.log(this.props.modalType)
         if (this.state.secondaryData.success == 0) {
-            return( <div className = "center-div"><Loading type='bars' color='#4484ce' /></div>)
+            return (<div className = "center-div"><Loading type='bars' color='#4484ce' /></div>)
         } else {
 
-        if (this.props.modalType == "construction") {
-            return (
-                <div>
+            if (this.props.modalType == "construction") {
+                return (
+                    <div>
                 <div className="row-fluid modal-header">
+                    <div className = "row-fluid modal-header">
+                        <div className=" col-md-12 col-lg-12 col-sm-12 modal-title modal-header">
+                                            {this.props.header} / {this.props.primaryData.stats.survey_status.surveys} benefeciaries surveyed / {((this.props.primaryData.stats.survey_status.surveys/this.props.primaryData.stats.survey_status.beneficiaries)*100).toFixed(0)}% 
+                                            <a className="close-button pull-right" onClick={() => this.props.closeModal()}><i className="fa fa-close"></i></a>
+                            
+                        </div>
+                    </div>
 
                     <div className="col-md-4 col-lg-4 col-sm-4">
                         <div className="modal-header col-md-12 col-lg-12 col-sm-12">
                         STATUS OF CONSTRUCTION
                         <div className="chart-container single-chart">
-                        <Chart.modalSingleBar percentageData = {this.state.primaryPercentageData} values = {this.state.primaryValues} id="chart11"/>
+                        <Chart.modalSingleBar heightRatio={0.5} percentageData = {this.state.primaryPercentageData} values = {this.state.primaryValues} id="chart11"/>
                         </div>
                         </div>
                     </div>
@@ -191,70 +156,68 @@ var ModalContent = React.createClass({
                             </div> 
                         <Update config ={this.state.updaterConfig}>
                             <div className="chart-container ">
-                            <Chart.modalMultipleBar data= {this.state.secondaryData} id="chart12"/>
+                            <Chart.modalMultipleBar heightRatio={0.5} data= {this.state.secondaryData} id="chart12"/>
                         </div>
                         </Update>
                     </div>
 
                 </div>
-                <div className="row-fluid">
-                    <div className="col-md-12 col-lg-12 col-sm-12">
-                        <p><button className="btn btn-sm btn-primary pull-right " onClick={() => this.props.closeModal()}>Close</button></p>
-                    </div>
+
                 </div>
-                </div>
-            )
-        } else if (this.props.modalType == "installment") {
-            return (
-                <div>
+                )
+            } else if (this.props.modalType == "installment") {
+                return (
+                    <div>
                 <div className="row-fluid modal-header">
+                    <div className = "row-fluid modal-header">
+                        <div className=" col-md-12 col-lg-12 col-sm-12 modal-title modal-header">
+                                            {this.props.header} / {this.props.primaryData.stats.survey_status.surveys} benefeciaries surveyed / {((this.props.primaryData.stats.survey_status.surveys/this.props.primaryData.stats.survey_status.beneficiaries)*100).toFixed(0)}% 
+                                            <a className="close-button pull-right" onClick={() => this.props.closeModal()}><i className="fa fa-close"></i></a>
+                            
+                        </div>
+                    </div>
                     <div className="col-md-4 col-lg-4 col-sm-4">
                         <div className="modal-header col-md-12 col-lg-12 col-sm-12">
-                        APPLIED FOR INSTALLMENT
-                        <div className="chart-container single-chart">
-                            <Chart.modalSingleBarInst  validity = "applied" percentageData = {this.state.primaryInstallmentPercentageData} values = {this.state.primaryInstallmentValues} id="chart11"/>
+                        
+                        <div className="chart-container single-chart-installment">
+                            <Chart.modalSingleBar heightRatio={0.20} validity = "applied" percentageData = {this.state.primaryInstallmentPercentageData} values = {this.state.primaryInstallmentValues} id="chart11"/>
                         </div>
                         </div>
                     </div>
                     <div className="col-md-8 col-lg-8 col-sm-8 secondary-chart">
                         When did you apply for the installment?
                         <div className="chart-container ">
-                        <Chart.modalMultipleApplyBarInst validity = "applied" data= {this.state.chartDataYes} id="chart12"/>
+                        <Chart.modalMultipleApplyBar  heightRatio={0.20} validity = "applied" data= {this.state.chartDataYes} id="chart12"/>
                         </div>
                     </div>
                 </div>
                 <div className="row-fluid modal-header">
                     <div className="col-md-4 col-lg-4 col-sm-4">
                         <div className="modal-header col-md-12 col-lg-12 col-sm-12">
-                        DID NOT APPLY FOR INSTALLMENT
-                        <div className="chart-container single-chart">
-                            <Chart.modalSingleBarInst  validity = "not applied" percentageData = {this.state.primaryInstallmentPercentageData} values = {this.state.primaryInstallmentValues} id="chart13"/>
+                        
+                        <div className="chart-container single-chart-installment">
+                            <Chart.modalSingleBar  heightRatio={0.20}  validity = "not applied" percentageData = {this.state.primaryInstallmentPercentageData} values = {this.state.primaryInstallmentValues} id="chart13"/>
                         </div>
                         </div>
                     </div>
                     <div className="col-md-8 col-lg-8 col-sm-8 secondary-chart">
                         Why couldn't you apply for the installment?
                         <div className="chart-container ">
-                        <Chart.modalMultipleApplyBarInst validity = "not applied" data= {this.state.chartDataNo} id="chart14"/>
+                        <Chart.modalMultipleApplyBar  heightRatio={0.20} validity = "not applied" data= {this.state.chartDataNo} id="chart14"/>
                         </div>
                     </div>
                 </div>
 
-                <div className="row-fluid">
-                    <div className="col-md-12 col-lg-12 col-sm-12">
-                        <p><button className="btn btn-sm btn-primary pull-right " onClick={() => this.props.closeModal()}>Close</button></p>
-                    </div>
                 </div>
-                </div>
-            )
-        } else {
-            return (
-                <div>
+                )
+            } else {
+                return (
+                    <div>
                 <h1>None selected</h1>
                 <p><button onClick={() => this.props.closeModal()}>Close</button></p>
                 </div>
-            )
-        }
+                )
+            }
         }
     }
 })

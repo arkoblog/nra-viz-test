@@ -108,7 +108,7 @@ var NepalMap = React.createClass({
         legend.addTo(map);
 
         map.on('zoomend', function() {
-            if (map.getZoom() < 8) {
+            if (map.getZoom() < 9) {
                 this._removeLayers();
                 this._addDistricts();
                 this.props.onSelectionUpdate({ "district": "*", "vdc": "*" })

@@ -5,7 +5,7 @@ var c3 = require('c3');
 var _ = require('lodash')
 
 var chartHeight = screen.height * 0.25;
-var modalChartHeight = screen.height * .4;
+var modalChartHeight = screen.height;
 
 var Bar = React.createClass({
     componentWillMount: function() {
@@ -324,7 +324,7 @@ var modalMultipleBar = React.createClass({
                   }
             },
             size: {
-                height: modalChartHeight
+                height: modalChartHeight * this.props.heightRatio
             }
         });
     },
@@ -567,7 +567,7 @@ var modalMultipleApplyBar = React.createClass({
                   }
             },
             size: {
-                height: modalChartHeight
+                height: modalChartHeight * this.props.heightRatio
             }
         });
     },
@@ -701,7 +701,7 @@ var modalSingleBar = React.createClass({
                 }
             },
             size: {
-                height: modalChartHeight
+                height: modalChartHeight  * this.props.heightRatio
             }
         });
     },

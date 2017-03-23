@@ -241,8 +241,16 @@ a:focus,
     text-transform: uppercase;
     font-family: 'Open Sans', serif;
     border:none;
-    margin-top:-8px;
+    /*margin-top:-8px;*/
+    padding:0;
     
+}
+
+.modal-title {
+        font-size: 16px;
+        margin-bottom:10px;
+        padding-bottom:5px;
+        border-bottom: 1px solid rgba(68, 132, 206, 0.5);
 }
 
 /*Links*/
@@ -330,6 +338,10 @@ a:focus,
     
 }
 
+.modal-header .c3-text {
+    font-size:9px;
+}
+
 
 .chart-container .c3-tooltip-container{
     margin-left:150px;
@@ -365,7 +377,11 @@ a:focus,
 }
 
 .single-chart {
-    margin-top:4px;
+    margin-top:11px;
+}
+
+.single-chart-installment {
+    margin-top:18px;
 }
 /* popup */
 

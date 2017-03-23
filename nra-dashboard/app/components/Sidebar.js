@@ -35,7 +35,7 @@ var Sidebar = React.createClass({
             <div>
 
             <Modal isOpen={this.state.isModalOpen} onClose={() => this._closeModal()}>
-            	<ModalContent locationParams = {this.props.locationParams} primaryData= {this.props.data} closeModal={this._closeModal} modalType = {this.state.modalType} />
+            	<ModalContent header = {this.props.header} locationParams = {this.props.locationParams} primaryData= {this.props.data} closeModal={this._closeModal} modalType = {this.state.modalType} />
             </Modal>
 
 			 <div id="sidebar" className="sidebar collapsed ">
