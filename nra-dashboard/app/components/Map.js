@@ -2,15 +2,17 @@ var React = require('react');
 var ReactDOM = require('react-dom')
 var L = require('leaflet');
 var polygons = require('../data/polygons');
+var npl_boundary = require('../data/npl_boundary');
 var _ = require('lodash')
-
+require('leaflet-boundary-canvas')
 require('../styles/styles.css');
 
 // var baseMapUrl = 'http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
-var baseMapUrl = 'http://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}'
+// var baseMapUrl = 'http://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}'
+// var baseMapUrl = 'https://api.mapbox.com/styles/v1/arkoblog/cj0nbcvov00bf2snztyypiyg5/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYXJrb2Jsb2ciLCJhIjoiY2l5MmczdzJyMDAxODJxcDY5NHMyeHpkMyJ9.la6WiYXrUzF1Iy4aST9tnA'
 var baseMapUrl2 = 'https://raw.githubusercontent.com/jedi-Knight/Maps-of-Nepal/v2/nepal-districts-vdcs/{z}/{x}/{y}.png'
 var currentDistricts = ['nuwakot', 'sindhupalchowk', 'dolakha', 'gorkha', 'dhading']
-
+var baseMapUrl = 'https://tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png'
 
 var NepalMap = React.createClass({
     getInitialState: function() {
@@ -64,14 +66,19 @@ var NepalMap = React.createClass({
     _loadMap: function() {
         var map = this.map = L.map(ReactDOM.findDOMNode(this)).setView([28.207, 85.992], 8);
 
-        var baseLayer = L.tileLayer(baseMapUrl, {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors <br> Website developed by <a target = "_blank" href="http://kathmandulivinglabs.org">Kathmandu Living Labs</a><br/>Imagery from <a target = "_blank" href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a>'
-        }).addTo(map);
 
-        var baseLayer = L.tileLayer(baseMapUrl2, {
+        var osm = L.TileLayer.boundaryCanvas(baseMapUrl, {
+            boundary: npl_boundary
         }).addTo(map);
+        var baseLayer = L.tileLayer(baseMapUrl2, {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors <br> Website developed by <a target = "_blank" href="http://kathmandulivinglabs.org">Kathmandu Living Labs</a>'
+        }).addTo(map);
+        // var baseLayer = L.tileLayer(baseMapUrl2, {
+        // }).addTo(map);
         
+
         this._addDistricts();
+
 
 
         L.control.scale().addTo(map);
@@ -100,7 +107,7 @@ var NepalMap = React.createClass({
 
 
             // loop through our density intervals and generate a label with a colored square for each interval
-            div.innerHTML += '<div class="legend-description">Percentage of total beneficiaries surveyed</div>'
+            div.innerHTML += '<div class="legend-description">total beneficiaries surveyed</div>'
             for (var i = 0; i < grades.length; i++) {
                 div.innerHTML +=
                     '<div class="legend-parent"><i class="legend-icon fa fa-circle"  style = " color: ' + this._getColor(grades[i] + 1) + ' " aria-hidden="true"></i>   <span class="legend-label">'+ labels[i] + '</span><br/></div>';
@@ -154,13 +161,17 @@ var NepalMap = React.createClass({
               // e.target.bindPopup().addTo(this.map)
             // console.log("moseOver")
             var layer = e.target;
-
-            layer.setStyle({
-                weight: 2,
-                color: 'rgba(0,0,0,0.7)',
-                dashArray: '0',
-                fillOpacity: 0.8
-            });
+            if(e.target.feature.properties.name != this.state.selectedDistrict) {
+                if(e.target.feature.properties.name != this.state.selectedVdc) {
+                        layer.setStyle({
+                            weight: 1,
+                            color: 'rgba(0,0,0,0.7)',
+                            dashArray: '0',
+                            fillOpacity: 0.8
+                        });
+                    
+                }
+            }
 
             if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
                 layer.bringToFront();
@@ -172,22 +183,32 @@ var NepalMap = React.createClass({
     _resetHighlight: function(e) {
         this.map.closePopup()
 
+
         var layer = e.target;
-        layer.setStyle({
-            weight: 0.5,
-            opacity: 1,
-            color: '#f8f8f8',
-            dashArray: '0',
-            fillOpacity: 0.8
-        });
+            if(e.target.feature.properties.name != this.state.selectedDistrict) {
+                if(e.target.feature.properties.name != this.state.selectedVdc) {
+                    if (e.target.feature.properties.type ) {
+                        layer.setStyle({
+                            weight: 0.5,
+                            opacity: 1,
+                            color: '#888',
+                            dashArray: '0',
+                            fillOpacity: 0.8
+                        });
+                    }
+                    
+                }
+            }
+
+
     },
     _afterFetchData: function() {
         // console.log("fetched", this.state.isDistrictClicked, this.state.selectedDistrict, this.props.data)
         if(this.state.isDistrictClicked == true) {
 
             this._removeLayers()
-            this._addLayer(this.state.selectedDistrict, "vdc");
             this._addRemainingDistricts(this.state.selectedDistrict);
+            this._addLayer(this.state.selectedDistrict, "vdc");
             this.setState({
                 isDistrictClicked:false
             })
@@ -199,7 +220,9 @@ var NepalMap = React.createClass({
     _removeLayers: function() {
         this.map.eachLayer(function(layer) {
             if (layer._url != baseMapUrl) {
-                this.map.removeLayer(layer)
+                if (layer._url != baseMapUrl2) {
+                 this.map.removeLayer(layer)
+                } 
             }
         }.bind(this))
     },
@@ -215,7 +238,34 @@ var NepalMap = React.createClass({
         }.bind(this))
     },
 
+    _resetStyles: function(layers){
+            var key = Object.keys(layers)[0]
+            // console.log(layers[key]._layers)
+            var layers = layers[key]._layers
+            for (var item in layers) {
+                console.log(layers[item])
+                layers[item].setStyle({
+                    weight: 1,
+                    opacity: 1,
+                    color: '#000',
+                    dashArray: '0',
+                    fillOpacity: 0.8
+                });
+
+            }
+                        // layer.setStyle({
+                        //     weight: 0.5,
+                        //     opacity: 1,
+                        //     color: '#888',
+                        //     dashArray: '0',
+                        //     fillOpacity: 0.8
+                        // });
+    },
+
     _zoomToFeature: function(e) {
+
+
+
         // console.log(e.target.feature)
         if(this.props.config.allowPointer == "auto") {
             if (e.target.feature.properties.type) {
@@ -239,19 +289,36 @@ var NepalMap = React.createClass({
                 })
 
                 this.props.onSelectionUpdate(newParams, this._afterFetchData);
-                // console.log("data updated")
-                // this._removeLayers()
-                // this._addLayer(selectedDistrict, "vdc");
-                // this._addRemainingDistricts(selectedDistrict);
+
 
             } else {
                 var districtCode = String(e.target.feature.properties.DIST_ID)
                 var vdcCode = String(e.target.feature.properties.code)
                 var vdcName = String(e.target.feature.properties.name)
 
+
+                this.setState({
+                    selectedVdc: vdcName
+                })
+
                 var newParams = {};
                 newParams.district = districtCode;
                 newParams.vdc = vdcCode;
+                
+                    // console.log(e.target)
+
+                var layer = e.target
+
+                this._resetStyles(layer._eventParents)
+
+                layer.setStyle({
+                            weight: 3.5,
+                            opacity: 1,
+                            color: '#b34100',
+                            dashArray: '0',
+                            fillOpacity: 0.8
+                });
+
                 newParams.name = vdcName;
 
                 this.props.onSelectionUpdate(newParams, this._afterFetchData);
@@ -291,6 +358,7 @@ var NepalMap = React.createClass({
                     newLayer._layers[Object.keys(newLayer._layers)[0]].options[key] = newStyles[key]
                 }
                 newLayer.addTo(this.map);
+
                 break;
             case "vdc":
                 // console.log(id)
@@ -301,6 +369,14 @@ var NepalMap = React.createClass({
                         newLayer._layers[key].options[styleKey] = newStyle[styleKey]
                     }
                 }
+
+                newLayer.setStyle({
+                    weight: 1,
+                    opacity: 1,
+                    color: '#000',
+                    dashArray: '0',
+                    fillOpacity: 0.8
+                });
                 // console.log("MyNew",newLayer)
                 newLayer.addTo(this.map);
                 break;
@@ -371,9 +447,9 @@ var NepalMap = React.createClass({
         // console.log("District:",feature);
         return {
             fillColor: this._getColor(feature.properties.completion, "district"),
-            weight: 1,
+            weight: 0.5,
             opacity: 1,
-            color: '#f8f8f8',
+            color: '#888',
             dashArray: '0',
             fillOpacity: 0.8
         };
@@ -381,9 +457,9 @@ var NepalMap = React.createClass({
     _styleVdc: function(feature) {
         return {
             fillColor: this._getColor(feature.properties.completion, "vdc"),
-            weight: 1,
+            weight: 0.5,
             opacity: 1,
-            color: '#f8f8f8',
+            color: '#888',
             dashArray: '0',
             fillOpacity: 0.8
         };

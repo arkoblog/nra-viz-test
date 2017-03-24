@@ -29,6 +29,7 @@
     "express": "^4.14.1",
     "jquery": "^3.1.1",
     "leaflet": "*",
+    "leaflet-boundary-canvas": "^1.0.0",
     "leaflet-search": "^2.7.0",
     "leaflet-sidebar-v2": "^1.0.0",
     "lodash": "^4.17.4",
