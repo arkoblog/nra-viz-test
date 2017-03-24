@@ -154,7 +154,7 @@ a:focus,
     color: rgb(68, 132, 206);
 }
 
-.bold {
+.bolder {
     font-weight: 700;
 }
 
@@ -210,6 +210,9 @@ a:focus,
     padding-top:25px;
 }
 
+.bold {
+    font-weight:300;
+}
 
 .info-text {
     font-family: 'Open Sans', serif;
@@ -223,7 +226,7 @@ a:focus,
     /*font-weight: bolder;*/
     font-size: 12px;
     text-transform: uppercase;
-    margin-top: -8px;
+    margin-top: -6px;
 }
 
 .total-survey-label {
@@ -264,10 +267,18 @@ a:focus,
 .leaflet-container {
     background: rgb(245,245,245);
 }
+
+
+.more {
+    display:inline;
+    /*display: table-cell;*/
+/*margin-top:-100px;*/
+    /*float:left;*/
+}
 /*Links*/
 .more > a{
     font-family: 'Open Sans', serif;
-    font-size: 12px;
+    font-size: 10px;
     color: #ff7e35;
     /*background-color: #F55800;*/
 }
@@ -275,8 +286,9 @@ a:focus,
 
 .more > a:hover{
     font-family: 'Open Sans', serif;
-    font-size: 12px;
-    font-weight:700;
+    font-size: 10px;
+    /*font-weight:700;*/
+    text-decoration: underline;
     color: #ff7e35 ;
     cursor:pointer;
 }

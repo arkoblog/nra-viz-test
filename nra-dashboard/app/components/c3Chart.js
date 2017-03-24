@@ -437,7 +437,7 @@ var modalMultipleApplyBar = React.createClass({
                     var number = keys.indexOf(d.id)
                     // console.log(d)
 
-                    if(d.index == 2) {
+                    if(this.props.validity == "applied") {
                         if (number == 0) {
                             return '#4484ce'
                             }
@@ -678,9 +678,151 @@ var modalSingleBar = React.createClass({
                     // + " / " + myValues[i]  
                 },
                 color: function(color,d) {  
+                    console.log(d)
+
+                    if(this.props.validity == "applied") {
+                            return '#4484ce'
+                    } else if (d.index == 1) {
+
+                            return '#0c4e9d'
+                        
+                    } else {
+                            return '#053064'
+                    }
+                }.bind(this)
+            },
+grid: {
+   focus: {
+      show: false
+   }
+},
+
+            axis: {
+                rotated: true,
+                x: {
+                    show: false,
+                    type: 'category'
+                },
+                y: {
+                    show: false,
+                    max: 100
+                }
+            },
+                        bar: {
+            width: {
+            ratio: 0.9
+            }
+            },
+            // regions: [
+            //     // {axis: 'y', end: 1, class: 'regionY'},
+            //     {axis: 'x', start: -0.5, end: 0.5, class: 'region1'},
+            //     {axis: 'x', start: 0.5, end: 1.5, class: 'region2'},
+            //     {axis: 'x', start: 1.5, end: 2.5, class: 'region1'},
+            // ],
+            legend: {
+                show: false
+            },
+            tooltip: {
+                contents: function(d, defaultTitleFormat, defaultValueFormat, color, index) {
+                        return "<div class='test' style='font-size:10px;padding:10px;background-color:rgb(245,245,245); margin-left:400px;'><font color='#4484ce'>" + labels[d[0].index] + "<br/>" + myValues[d[0].index] + " / " + d[0].value + "% </font></div>";
+                }
+            },
+            size: {
+                height: modalChartHeight  * this.props.heightRatio
+            }
+        });
+    },
+    render() {
+        return <div id = { this.props.id }
+        className = ""
+        style = {
+            { "height": "100%", "width": "100%" }
+        }
+        ref = "refName" > </div>;
+    }
+});
+
+var modalSingleBar2 = React.createClass({
+    componentWillMount: function() {
+        this._updateChart();
+    },
+    _formatData: function(data) {
+        var formattedData = []
+        _.forEach(data, function(value, key) {
+            var emptyObject = {}
+            emptyObject.title = key;
+            emptyObject.value = value;
+            emptyObject.percentage = Number(this.props.values[key])
+            formattedData.push(emptyObject)
+
+        }.bind(this))
+        // console.log(this.props.validity,arr)
+
+        if (this.props.validity == "applied") {
+            var newArr = [formattedData[0]]
+        } else if (this.props.validity == "not applied"){
+            var newArr = [formattedData[1]]
+        } else {
+            var newArr = formattedData
+        }
+        return (newArr)
+    },
+    _prepareData: function(data) {
+        var arr = [];
+
+        for (var item in data) {
+            var obj = {}
+
+            obj["axis"] = item
+            for (var i in data[item].percentageStats) {
+                obj[i] = data[item].percentageStats[i]
+            }
+
+            arr.push(obj)
+
+        }
+        console.log(arr)
+    },
+    componentDidMount: function() {
+        this._updateChart();
+    },
+    componentDidUpdate: function() {
+        this._updateChart();
+    },
+
+    _updateChart: function() {
+        var myChartData = this._formatData(this.props.percentageData);
+        var myValues = _.values(this.props.values)
+        var labels = _.map(myChartData, "title")
+
+        c3.generate({
+            bindto: '#' + this.props.id,
+            data: {
+                json: myChartData,
+                keys: {
+                    x: 'title', // it's possible to specify 'x' when category axis
+                    value: ['value'],
+                },
+                type: "bar",
+                // color: function(color,d) {  
+                //     if(d.index == 0) {
+                //         return '#4484ce'
+                //     } else if (d.index == 1) {
+                //         return 'red'
+                //     } else {
+                //         return 'yellow'
+                //     }
+                // },
+                labels: {
+                    format: function(v, id, i, j) {
+                        return labels[i] == "dummy" ? "" : labels[i] + " (" + v + "%)"
+                    },
+                    // + " / " + myValues[i]  
+                },
+                color: function(color,d) {  
                     // console.log(d)
 
-                    if(d.index == 2) {
+                    if(this.props.validity == "not applied") {
                             return '#4484ce'
                     } else if (d.index == 1) {
 
@@ -743,9 +885,11 @@ grid: {
 });
 
 
+
 module.exports = {
     Bar: Bar,
     modalSingleBar: modalSingleBar,
+    modalSingleBar2: modalSingleBar2,
     modalMultipleBar: modalMultipleBar,
     modalMultipleApplyBar: modalMultipleApplyBar,
 };

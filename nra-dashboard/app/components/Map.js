@@ -71,7 +71,7 @@ var NepalMap = React.createClass({
             boundary: npl_boundary
         }).addTo(map);
         var baseLayer = L.tileLayer(baseMapUrl2, {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors <br> Website developed by <a target = "_blank" href="http://kathmandulivinglabs.org">Kathmandu Living Labs</a>'
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors <br> Developed by <a target = "_blank" href="http://kathmandulivinglabs.org">Kathmandu Living Labs</a>'
         }).addTo(map);
         // var baseLayer = L.tileLayer(baseMapUrl2, {
         // }).addTo(map);
@@ -119,14 +119,14 @@ var NepalMap = React.createClass({
         legend.addTo(map);
 
 
-        map.on('zoomend', function() {
-            if (map.getZoom() < 9) {
-                this._removeLayers();
-                this._addDistricts();
-                this.props.onSelectionUpdate({ "district": "*", "vdc": "*" })
+        // map.on('zoomend', function() {
+        //     if (map.getZoom() < 9) {
+        //         this._removeLayers();
+        //         this._addDistricts();
+        //         this.props.onSelectionUpdate({ "district": "*", "vdc": "*" })
 
-            }
-        }.bind(this))
+        //     }
+        // }.bind(this))
     },
     _addDistricts: function() {
         this._addLayer("nuwakot", "district");
@@ -243,7 +243,6 @@ var NepalMap = React.createClass({
             // console.log(layers[key]._layers)
             var layers = layers[key]._layers
             for (var item in layers) {
-                console.log(layers[item])
                 layers[item].setStyle({
                     weight: 1,
                     opacity: 1,
