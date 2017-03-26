@@ -51,7 +51,7 @@ a:focus {
 
 ul,
 ol {
-    list-style: none;
+    /*list-style: none;*/
 }
 
 .nopadding {
@@ -218,7 +218,7 @@ a:focus,
     font-family: 'Open Sans', serif;
     font-size:10px;
     color:rgb(68, 132, 206);
-    max-width:270px;
+    max-width:275px;
 }
 
 .proportion-surveys{
@@ -242,6 +242,15 @@ a:focus,
     font-weight: bold;
     font-size: 12px;
     text-transform: uppercase;
+
+}
+
+.bar-header-about {
+    color: rgb(68, 132, 206);
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
 
 }
 
@@ -602,4 +611,9 @@ overflow-y: hidden; */
 .info-content p {
     font-size: 12px;
     font-family: 'Open Sans', serif;
+
+}
+
+.info-content {
+        list-style: georgian outside;
 }
