@@ -105,6 +105,10 @@ var ModalContent = React.createClass({
     componentWillMount: function() {
         this.onParameterChange(this.state.modalParams); // console.log(this.props.primaryData)
     },
+    _formatNumber: function(data) {
+        var format = d3.format(",");
+        return format(data)
+    },
     _handleChange: function(e) {
         var params = JSON.parse(e.target.value);
         var newParams = {}
@@ -139,7 +143,7 @@ var ModalContent = React.createClass({
 
                     <div className="col-md-4 col-lg-4 col-sm-4">
                         <div className="modal-header col-md-12 col-lg-12 col-sm-12">
-                        STATUS OF CONSTRUCTION
+                        STATUS OF CONSTRUCTION *
                         <div className="chart-container single-chart">
                         <Chart.modalSingleBar heightRatio={0.5} percentageData = {this.state.primaryPercentageData} values = {this.state.primaryValues} id="chart11"/>
                         </div>
@@ -164,6 +168,11 @@ var ModalContent = React.createClass({
                             <Chart.modalMultipleBar heightRatio={0.5} data= {this.state.secondaryData} id="chart12"/>
                         </div>
                         </Update>
+
+
+                    </div>
+                    <div className="col-md-12 col-lg-12 col-sm-12">
+                        <span className="row-fluid footnote">* Percentage distribution is based on the total beneficiaries surveyed till date. (i.e. 100% = {this._formatNumber(this.props.primaryData.stats.survey_status.surveys)} beneficiaries.)</span>
                     </div>
 
                 </div>
@@ -185,7 +194,7 @@ var ModalContent = React.createClass({
                         <div className="modal-header col-md-12 col-lg-12 col-sm-12">
                         
                         <div className="chart-container single-chart-installment">
-                            <Chart.modalSingleBar heightRatio={0.20} validity = "applied" percentageData = {this.state.primaryInstallmentPercentageData} values = {this.state.primaryInstallmentValues} id="chart11"/>
+                            <Chart.modalSingleBar2 heightRatio={0.20} validity = "applied" percentageData = {this.state.primaryInstallmentPercentageData} values = {this.state.primaryInstallmentValues} id="chart11"/>
                         </div>
                         </div>
                     </div>
@@ -201,7 +210,7 @@ var ModalContent = React.createClass({
                         <div className="modal-header col-md-12 col-lg-12 col-sm-12">
                         
                         <div className="chart-container single-chart-installment">
-                            <Chart.modalSingleBar  heightRatio={0.20}  validity = "not applied" percentageData = {this.state.primaryInstallmentPercentageData} values = {this.state.primaryInstallmentValues} id="chart13"/>
+                            <Chart.modalSingleBar2  heightRatio={0.20}  validity = "not applied" percentageData = {this.state.primaryInstallmentPercentageData} values = {this.state.primaryInstallmentValues} id="chart13"/>
                         </div>
                         </div>
                     </div>

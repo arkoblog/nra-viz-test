@@ -99,29 +99,29 @@ var Root = React.createClass({
     },
     onSelectionUpdate: function(newParams, callback) {
         // console.log("Updated Parameters",newParams);
-        this.setState({
-            updaterConfig: { opacity: 0.4, allowPointer: "none" }
-        })
-        if (newParams.district == "*") {
-            this.setState({
-                header: "All Districts".toUpperCase()
-            })
-        } else {
-            this.setState({
-                header: (newParams.name).toUpperCase()
-            })
-        }
-
         var params = {
             district: newParams.district,
             vdc: newParams.vdc
         }
 
-        this.setState({
-            filterParams:params
-        }, this.onParameterChange(params, callback))
 
-        
+        if (newParams.district == "*") {
+            this.setState({
+                header: "All Districts".toUpperCase(),
+                updaterConfig: { opacity: 0.4, allowPointer: "none" },
+                filterParams:params
+
+            }, this.onParameterChange(params, callback))
+        } else {
+            this.setState({
+                header: (newParams.name).toUpperCase(),
+                updaterConfig: { opacity: 0.4, allowPointer: "none" },
+                filterParams:params
+            }, this.onParameterChange(params, callback))
+        }
+
+
+
     },
 
     render: function() {
@@ -133,7 +133,7 @@ var Root = React.createClass({
                 <div>
                         <Nav/>
                         <Update config ={this.state.updaterConfig}>
-                        <NepalMap config = {this.state.updaterConfig} data = {this.state.data} onSelectionUpdate={this.onSelectionUpdate} sidebarOpener={this.sidebarOpener}> 
+                        <NepalMap config = {this.state.updaterConfig} header = {this.state.header} data = {this.state.data} onSelectionUpdate={this.onSelectionUpdate} sidebarOpener={this.sidebarOpener}> 
                         <Sidebar locationParams = {this.state.filterParams} data={this.state.data} header={this.state.header}/> </NepalMap>
                         </Update>
                 </div>

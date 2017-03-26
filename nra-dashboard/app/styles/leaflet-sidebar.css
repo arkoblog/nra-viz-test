@@ -3,6 +3,7 @@
     position: absolute;
     top: 0;
     bottom: 0;
+
     width: 100%;
     overflow: hidden;
     z-index: 2000;
@@ -69,6 +70,20 @@
     background-color: rgba(245, 245, 245, 1);
 }
 
+#nolink {
+    background-color:rgba(245, 245, 245, 1);
+    color: rgba(68, 132, 206, 1);
+} 
+
+#nolink:hover {
+    color: #ff7e35;
+} 
+
+#nolink.active {
+    background-color:rgba(225, 225, 225, 1);
+    color: #ff7e35;
+} 
+
 .sidebar-left .sidebar-tabs {
     left: 0;
 }
@@ -97,20 +112,20 @@
 
 .sidebar-tabs > li:hover,
 .sidebar-tabs > ul > li {
-    color: #4484ce;
-    background-color: #eee;
+    color: rgba(245, 245, 245, 1);
+    background-color: rgba(68, 132, 206, 1);
 }
 
 .sidebar-tabs > li:hover,
 .sidebar-tabs > ul > li:hover {
-    color: #000;
-    background-color: #eee;
+    color: #ff7e35;
+    background-color: rgba(68, 132, 206, 1);
 }
 
 .sidebar-tabs > li.active,
 .sidebar-tabs > ul > li.active {
     color: #fff;
-    background-color: #4484ce;
+    background-color: rgba(11, 79, 161, 1);
 }
 
 .sidebar-tabs > li.disabled,
@@ -148,7 +163,7 @@
     top: 0;
     bottom: 0;
     border-radius: 0px;
-    background-color: rgba(245, 245, 245, 0.95);
+    background-color: rgba(245, 245, 245, 1);
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -208,7 +223,7 @@
     font-weight: 600;
     color: rgb(245, 245, 245);
     text-align: left;
-    background-color: #4484ce;
+    background-color: rgba(68, 132, 206, 1);
 }
 
 .sidebar-right .sidebar-header {
@@ -334,28 +349,28 @@
 
 @media (min-width: 768px) {
     .sidebar-tabs {
-        background-color: rgba(245, 245, 245, 0.95);
+        background-color: rgba(245, 245, 245, 1);
         height: 100%;
     }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
     .sidebar-tabs {
-        background-color: rgba(245, 245, 245, 0.95);
+        background-color: rgba(245, 245, 245, 1);
         height: 100%;
     }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
     .sidebar-tabs {
-        background-color: rgba(245, 245, 245, 0.95);
+        background-color: rgba(245, 245, 245, 1);
         height: 100%;
     }
 }
 
 @media (min-width: 1200px) {
     .sidebar-tabs {
-        background-color: rgba(245, 245, 245, 0.95);
+        background-color: rgba(245, 245, 245, 1);
         height: 100%;
     }
 }

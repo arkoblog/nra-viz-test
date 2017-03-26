@@ -245,6 +245,15 @@ a:focus,
 
 }
 
+.footnote{
+    color: rgb(68, 132, 206);
+    font-size: 10px;
+    padding-right:50px;
+    text-transform: none;
+    font-weight:300;
+
+}
+
 .modal-header {
     color: rgb(68, 132, 206);
     font-weight: bold;
@@ -379,6 +388,11 @@ a:focus,
     margin-left:150px;
 }
 
+.reset-btn {
+    background-color: rgb(68, 132, 206);
+    font-family: 'Open Sans', serif;
+
+}
 .c3-tooltip  td {
     font-size:10px;
     font-style:normal;    
@@ -393,12 +407,12 @@ a:focus,
 }
 
 .c3-region.region1 {
-  /*fill: #0b4fa1;*/
-  /*border:1px solid #000;*/
+  fill: #053064;
+  border:1px solid #000;
 }
 
 .c3-region.region2 {
-  /*fill: #4483ce;*/
+  fill: #4483ce;
 }
 /*.c3-region.region3 {
   fill: blue;
@@ -418,7 +432,7 @@ a:focus,
 /* popup */
 
 .secondary-chart {
-    margin-left:-50px;
+    margin-left:-40px;
 }
 
 .custom {
@@ -513,13 +527,14 @@ a:focus,
 }
 
 .info{
-    background-color: rgb(245,245,245,0.8);
+    background-color: rgba(245,245,245,0.8);
     padding:10px;
     z-index: 1000000;
     font-family: 'Open Sans', serif;
     font-size:12px;
     color:rgb(68, 132, 206);
     max-width:190px;
+    /*margin-left: -100px;*/
 }
 
 

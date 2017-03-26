@@ -81,7 +81,6 @@ var NepalMap = React.createClass({
 
 
 
-        L.control.scale().addTo(map);
 
         var sidebar = L.control.sidebar('sidebar', { position: 'right' }).addTo(map);
         this.props.sidebarOpener(false);
@@ -97,8 +96,10 @@ var NepalMap = React.createClass({
         })
 
 
+        
         var legend = L.control({position: 'bottomleft'});
 
+        L.control.scale({position: 'bottomright'}).addTo(map);
         legend.onAdd = function (map) {
 
             var div = L.DomUtil.create('div', 'info legend'),
@@ -107,7 +108,7 @@ var NepalMap = React.createClass({
 
 
             // loop through our density intervals and generate a label with a colored square for each interval
-            div.innerHTML += '<div class="legend-description">total beneficiaries surveyed</div>'
+            div.innerHTML += '<div class="legend-description">survey completion</div>'
             for (var i = 0; i < grades.length; i++) {
                 div.innerHTML +=
                     '<div class="legend-parent"><i class="legend-icon fa fa-circle"  style = " color: ' + this._getColor(grades[i] + 1) + ' " aria-hidden="true"></i>   <span class="legend-label">'+ labels[i] + '</span><br/></div>';
@@ -118,6 +119,38 @@ var NepalMap = React.createClass({
 
         legend.addTo(map);
 
+        var reset = new L.Control({position:'topleft'});
+            reset.onAdd = function(map) {
+                    var azoom = L.DomUtil.create('a','resetzoom');
+                    azoom.innerHTML = "<div class='info'><button class='reset-btn btn btn-sm btn-xs btn-primary'>Reset to default</button></div>";
+                    L.DomEvent
+                        .disableClickPropagation(azoom)
+                        .addListener(azoom, 'click', function() {
+                            this._removeLayers();
+                            this._addDistricts();
+                            this.props.onSelectionUpdate({ "district": "*", "vdc": "*" })
+                            map.setView([28.207, 85.992], 8);
+                        }.bind(this),azoom);
+                    return azoom;
+        }.bind(this);
+
+        var reset = new L.Control({position:'bottomleft'});
+            reset.onAdd = function(map) {
+                    var azoom = L.DomUtil.create('a','resetzoom');
+                    azoom.innerHTML = "<div class='info'><button class='reset-btn btn btn-sm btn-xs btn-primary'>Reset to default</button></div>";
+                    L.DomEvent
+                        .disableClickPropagation(azoom)
+                        .addListener(azoom, 'click', function() {
+                            this._removeLayers();
+                            this._addDistricts();
+                            this.props.onSelectionUpdate({ "district": "*", "vdc": "*" }, this._afterFetchData)
+                            map.setView([28.207, 85.992], 8);
+                        }.bind(this),azoom);
+                    return azoom;
+        }.bind(this);
+
+        
+        this.reset = reset
 
         // map.on('zoomend', function() {
         //     if (map.getZoom() < 9) {
@@ -203,6 +236,18 @@ var NepalMap = React.createClass({
 
     },
     _afterFetchData: function() {
+        console.log(this.props.header)
+
+        if (this.props.header == "ALL DISTRICTS") {
+            console.log("New Data", this.props.header)
+            this.map.removeControl(this.reset)
+        } else {
+            console.log("New Data", this.props.header)
+            this.map.removeControl(this.reset)
+            this.reset.addTo(this.map)
+        }
+
+
         // console.log("fetched", this.state.isDistrictClicked, this.state.selectedDistrict, this.props.data)
         if(this.state.isDistrictClicked == true) {
 
@@ -214,6 +259,10 @@ var NepalMap = React.createClass({
             })
             
         }
+
+
+
+        // console.log(this.props.header)
 
     },
 
@@ -311,9 +360,9 @@ var NepalMap = React.createClass({
                 this._resetStyles(layer._eventParents)
 
                 layer.setStyle({
-                            weight: 3.5,
+                            weight: 4.5,
                             opacity: 1,
-                            color: '#b34100',
+                            color: '#000',
                             dashArray: '0',
                             fillOpacity: 0.8
                 });

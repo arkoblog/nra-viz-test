@@ -42,7 +42,7 @@ var Sidebar = React.createClass({
 			        <div className="sidebar-tabs ">
 			            <ul role="tablist">
 			                <li><a href="#home" role="tab"><i className="fa fa-area-chart"></i></a></li>
-			                <li><a href="#info" role="tab"><i className="fa fa-info-circle"></i></a></li>
+			                <li id = "nolink"><a  href="#info" role="tab"><i className="fa fa-info-circle"></i></a></li>
 			            </ul>
 
 
