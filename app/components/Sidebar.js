@@ -61,38 +61,32 @@ var Sidebar = React.createClass({
 			                    <span className="sidebar-close"><i className="fa fa-remove"></i></span>
 			                	WELCOME
 			                </h1>
-			                <div className="row-fluid ">
+			                <div className="row-fluid sidebar-info-text">
 			                <div className="content-row info-text col-md-12 col-lg-12 col-sm-12 ">
-							<div className="row-fluid info-content">
-
-								<span className="bar-header-about">About this website</span><br/><br/>
-								<div className="row-fluid  ">
-
-									<p>This website shows the latest statistics of the Housing Reconstruction Assessment survey being conducted by the National Reconstruction Authority (NRA) of Nepal.</p>
-
-									<p>To view the statistics, click on the   <i className="fa fa-area-chart"></i>   icon in the top-right corner.</p><br/>
-								</div>
-							</div>
-							<div className="row-fluid info-content">
-
-								<span className="bar-header-about">About this Survey</span><br/><br/>
-								<div className="row-fluid  ">
-
-									<p>The National Reconstruction Authority (NRA) has deployed volunteers to assess the status of housing reconstruction in the earthquake-affected districts of Nepal. These volunteers go to field and interview the house owners identified as beneficiaries by the National Housing Reconstruction Program survey.</p>
-
-									<p>The main objectives of this survey are as follows:
+			                	<div className="row-fluid bar-header">About this website</div>
+			                	<div className="row-fluid info-content">
+			                		<p>This website shows the latest statistics of the Housing Reconstruction Assessment survey being conducted by the National Reconstruction Authority (NRA) of Nepal.
 									</p>
-									<ol>
-										<li>To ascertain the number of reconstructed houses, i.e. how many houses have been reconstructed, how many are being reconstructed and how many are yet to be reconstructed?</li>
-										<li>To ascertain the status of reconstructed houses, i.e. what percentage of the reconstructed houses have followed the building codes?</li>
-										<li>To identify the actual issues, if any, which are preventing the reconstruction efforts on field (for example, issues like lack of skilled manpower, lack of construction materials, etc.)</li>
+									<p>To view the statistics, click on the following icon located at the top right corner:  <br/><i className="fa fa-area-chart click-icon"></i> <br/></p>
 
-									</ol>
-									<p>In its current phase, about 1,000 volunteers (final year engineering students from Pokhara University) are conducting this survey in five districts (Dolakha, Dhading, Gorkha, Nuwakot and Sindhupalchowk).
+			                	</div>
+			                </div>
+			                <div className="content-row info-text col-md-12 col-lg-12 col-sm-12 ">
+			                	<div className="row-fluid bar-header">About the survey</div>
+			                	<div className="row-fluid info-content">
+			                		<p>The National Reconstruction Authority (NRA) has deployed volunteers to assess the status of housing reconstruction in the earthquake-affected districts of Nepal. These volunteers go to field and interview the house owners identified as beneficiaries by the National Housing Reconstruction Program survey (also read Earthquake Housing Reconstruction Programme). The main objectives of this survey are as follows:</p>
+			                		<p>
+			                			<ol>
+			                				<li>To ascertain the number of reconstructed houses, i.e. how many houses have been reconstructed, how many are being reconstructed and how many are yet to be reconstructed?</li>
+			                				<li>To ascertain the status of reconstructed houses. For example, what percentage of the reconstructed houses have followed the building codes? </li>
+			                				<li>To identify the actual issues, if any, which are impeding the reconstruction efforts on field (for example, issues like lack of skilled labor, lack of construction materials, etc.).</li>
+
+			                			</ol>
 									</p>
+									<p>In its current phase, about 1,000 volunteers (final year engineering students from Pokhara University) are conducting this survey in five districts (Dolakha, Dhading, Gorkha, Nuwakot and Sindhupalchowk) in the first three weeks of March 2017.</p>
+								
 
-								</div>
-							</div>
+			                	</div>
 			                </div>
 			                </div>
 			            </div>

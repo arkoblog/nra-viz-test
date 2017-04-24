@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom')
 var L = require('leaflet');
-var polygons = require('../data/polygons');
+// var polygons = require('../data/polygons');
 var npl_boundary = require('../data/npl_boundary');
 var _ = require('lodash')
 require('leaflet-boundary-canvas')
@@ -64,14 +64,14 @@ var NepalMap = React.createClass({
 
     },
     _loadMap: function() {
-        var map = this.map = L.map(ReactDOM.findDOMNode(this)).setView([28.207, 85.992], 8);
+        var map = this.map = L.map(ReactDOM.findDOMNode(this), {scrollWheelZoom: false,attributionControl: false}).setView([28.207, 85.992], 8);
 
-
+        L.control.attribution({position: 'bottomright', prefix:false}).addTo(map);
         var osm = L.TileLayer.boundaryCanvas(baseMapUrl, {
             boundary: npl_boundary
         }).addTo(map);
         var baseLayer = L.tileLayer(baseMapUrl2, {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors <br> Developed by <a target = "_blank" href="http://kathmandulivinglabs.org">Kathmandu Living Labs</a>'
+            attribution: 'Developed by <a target = "_blank" href="http://kathmandulivinglabs.org">Kathmandu Living Labs</a> <br>  <a href = "http://leafletjs.com" >Leaflet</a> | &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors '
         }).addTo(map);
         // var baseLayer = L.tileLayer(baseMapUrl2, {
         // }).addTo(map);
@@ -95,8 +95,7 @@ var NepalMap = React.createClass({
             map.dragging.enable();
         })
 
-
-        
+       
         var legend = L.control({position: 'bottomleft'});
 
         L.control.scale({position: 'bottomright'}).addTo(map);
@@ -119,21 +118,6 @@ var NepalMap = React.createClass({
 
         legend.addTo(map);
 
-        var reset = new L.Control({position:'topleft'});
-            reset.onAdd = function(map) {
-                    var azoom = L.DomUtil.create('a','resetzoom');
-                    azoom.innerHTML = "<div class='info'><button class='reset-btn btn btn-sm btn-xs btn-primary'>Reset to default</button></div>";
-                    L.DomEvent
-                        .disableClickPropagation(azoom)
-                        .addListener(azoom, 'click', function() {
-                            this._removeLayers();
-                            this._addDistricts();
-                            this.props.onSelectionUpdate({ "district": "*", "vdc": "*" })
-                            map.setView([28.207, 85.992], 8);
-                        }.bind(this),azoom);
-                    return azoom;
-        }.bind(this);
-
         var reset = new L.Control({position:'bottomleft'});
             reset.onAdd = function(map) {
                     var azoom = L.DomUtil.create('a','resetzoom');
@@ -147,7 +131,7 @@ var NepalMap = React.createClass({
                             map.setView([28.207, 85.992], 8);
                         }.bind(this),azoom);
                     return azoom;
-        }.bind(this);
+        }.bind(this);   
 
         
         this.reset = reset
@@ -236,13 +220,13 @@ var NepalMap = React.createClass({
 
     },
     _afterFetchData: function() {
-        console.log(this.props.header)
+        // console.log(this.props.header)
 
         if (this.props.header == "ALL DISTRICTS") {
-            console.log("New Data", this.props.header)
+            // console.log("New Data", this.props.header)
             this.map.removeControl(this.reset)
         } else {
-            console.log("New Data", this.props.header)
+            // console.log("New Data", this.props.header)
             this.map.removeControl(this.reset)
             this.reset.addTo(this.map)
         }
@@ -378,18 +362,18 @@ var NepalMap = React.createClass({
     _addLayer: function(id, level) {
         var layers = {
             districts: {
-                dhading: L.geoJSON(polygons.districts.dhading, { style: this._styleDistrict, onEachFeature: this._onEachFeature }),
-                gorkha: L.geoJSON(polygons.districts.gorkha, { style: this._styleDistrict, onEachFeature: this._onEachFeature }),
-                sindhupalchowk: L.geoJSON(polygons.districts.sindhupalchowk, { style: this._styleDistrict, onEachFeature: this._onEachFeature }),
-                dolakha: L.geoJSON(polygons.districts.dolakha, { style: this._styleDistrict, onEachFeature: this._onEachFeature }),
-                nuwakot: L.geoJSON(polygons.districts.nuwakot, { style: this._styleDistrict, onEachFeature: this._onEachFeature })
+                dhading: L.geoJSON(districts.dhading, { style: this._styleDistrict, onEachFeature: this._onEachFeature }),
+                gorkha: L.geoJSON(districts.gorkha, { style: this._styleDistrict, onEachFeature: this._onEachFeature }),
+                sindhupalchowk: L.geoJSON(districts.sindhupalchowk, { style: this._styleDistrict, onEachFeature: this._onEachFeature }),
+                dolakha: L.geoJSON(districts.dolakha, { style: this._styleDistrict, onEachFeature: this._onEachFeature }),
+                nuwakot: L.geoJSON(districts.nuwakot, { style: this._styleDistrict, onEachFeature: this._onEachFeature })
             },
             vdcs: {
-                dhading: L.geoJSON(polygons.vdcs.dhading, { style: this._styleVdc, onEachFeature: this._onEachFeature }),
-                gorkha: L.geoJSON(polygons.vdcs.gorkha, { style: this._styleVdc, onEachFeature: this._onEachFeature }),
-                sindhupalchowk: L.geoJSON(polygons.vdcs.sindhupalchowk, { style: this._styleVdc, onEachFeature: this._onEachFeature }),
-                dolakha: L.geoJSON(polygons.vdcs.dolakha, { style: this._styleVdc, onEachFeature: this._onEachFeature }),
-                nuwakot: L.geoJSON(polygons.vdcs.nuwakot, { style: this._styleVdc, onEachFeature: this._onEachFeature })
+                dhading: L.geoJSON(vdcs.dhading, { style: this._styleVdc, onEachFeature: this._onEachFeature }),
+                gorkha: L.geoJSON(vdcs.gorkha, { style: this._styleVdc, onEachFeature: this._onEachFeature }),
+                sindhupalchowk: L.geoJSON(vdcs.sindhupalchowk, { style: this._styleVdc, onEachFeature: this._onEachFeature }),
+                dolakha: L.geoJSON(vdcs.dolakha, { style: this._styleVdc, onEachFeature: this._onEachFeature }),
+                nuwakot: L.geoJSON(vdcs.nuwakot, { style: this._styleVdc, onEachFeature: this._onEachFeature })
             }
         };
 

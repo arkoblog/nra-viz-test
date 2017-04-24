@@ -24,7 +24,7 @@ var Insights = React.createClass({
     },
     render: function() {
         return (
-            <div className="row-fluid ">
+            <div className="row-fluid sidebar-info-insights ">
 
                 <div className="content-row col-md-12 col-lg-12 col-sm-12">
                     <div className="row-fluid bar-header">total beneficiaries surveyed</div>
@@ -33,8 +33,8 @@ var Insights = React.createClass({
                 </div>
 
                 <div className="content-row col-md-12 col-lg-12 col-sm-12 ">
-                    <span className="row-fluid bar-header">status of reconstructed houses *</span>
-                    <span className="row-fluid more"><a onClick={() => this.props.modalOpener("construction")}  className="details-link"> (View Details)</a></span>
+                    <span className="row-fluid bar-header">status of reconstructed houses *</span><br/>
+                    <span className="row-fluid more"><a onClick={() => this.props.modalOpener("construction")}  className="details-link"> View details</a></span>
                     <div className="row-fluid  "><Chart.Bar id="chart1" percentageData = {this.props.data.percentageStats.construction_status} values = {this.props.data.stats.construction_status}/></div>
                 </div>
                 <div className="content-row col-md-12 col-lg-12 col-sm-12">
@@ -48,15 +48,15 @@ var Insights = React.createClass({
 
 
                 <div className="content-row col-md-12 col-lg-12 col-sm-12">
-                    <span className="row-fluid bar-header">Applied for second installment? *</span>
-                    <span className="row-fluid more"><a onClick={() => this.props.modalOpener("installment")}  className="details-link"> (View Details)</a></span>
+                    <span className="row-fluid bar-header">Applied for second installment? *</span><br/>
+                    <span className="row-fluid more"><a onClick={() => this.props.modalOpener("installment")}  className="details-link"> View details</a></span>
                     <div className="row-fluid ">
                     <Chart.Bar id="chart2" percentageData= {this.props.data.percentageStats.installment_status} values = {this.props.data.stats.installment_status}/>
                     </div>
                 </div>
 
                 <div className="content-row col-md-12 col-lg-12 col-sm-12">
-                    <span className="row-fluid footnote">* Percentage distribution is based on the total beneficiaries surveyed till date. (i.e. 100% = {this._formatNumber(this.props.data.stats.survey_status.surveys)} beneficiaries.)</span>
+                    <span className="row-fluid footnote"><b style = {{fontWeight:700, fontSize:15}}>*</b> Percentage distribution is based on the total beneficiaries surveyed till date. (i.e. 100% = {this._formatNumber(this.props.data.stats.survey_status.surveys)} beneficiaries.)</span>
                 </div>
 
             </div>

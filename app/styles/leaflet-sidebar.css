@@ -80,6 +80,7 @@
 } 
 
 #nolink.active {
+    /*background-color:rgba(225, 225, 225, 1);*/
     color: #ff7e35;
 } 
 
@@ -123,8 +124,8 @@
 
 .sidebar-tabs > li.active,
 .sidebar-tabs > ul > li.active {
-    color: #fff;
-    background-color: rgba(11, 79, 161, 1);
+    color: #ff7e35;
+    /*background-color: rgba(11, 79, 161, 1);*/
 }
 
 .sidebar-tabs > li.disabled,
@@ -164,7 +165,7 @@
     border-radius: 0px;
     background-color: rgba(245, 245, 245, 1);
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 
 .sidebar-left .sidebar-content {
@@ -187,6 +188,7 @@
     right: 0;
     box-sizing: border-box;
     padding: 10px 20px;
+
 }
 
 .sidebar-pane.active {
@@ -195,19 +197,19 @@
 
 @media (min-width: 768px) and (max-width: 991px) {
     .sidebar-pane {
-        min-width: 265px;
+        min-width: 299px;
     }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
     .sidebar-pane {
-        min-width: 350px;
+        min-width: 384px;
     }
 }
 
 @media (min-width: 1200px) {
     .sidebar-pane {
-        min-width: 420px;
+        min-width: 384px;
     }
 }
 

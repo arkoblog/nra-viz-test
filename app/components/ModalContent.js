@@ -145,7 +145,7 @@ var ModalContent = React.createClass({
                         <div className="modal-header col-md-12 col-lg-12 col-sm-12">
                         STATUS OF CONSTRUCTION *
                         <div className="chart-container single-chart">
-                        <Chart.modalSingleBar heightRatio={0.5} percentageData = {this.state.primaryPercentageData} values = {this.state.primaryValues} id="chart11"/>
+                        <Chart.modalSingleBar heightRatio={0.6} percentageData = {this.state.primaryPercentageData} values = {this.state.primaryValues} id="chart11"/>
                         </div>
                         </div>
                     </div>
@@ -165,7 +165,7 @@ var ModalContent = React.createClass({
                             </div> 
                         <Update config ={this.state.updaterConfig}>
                             <div className="chart-container ">
-                            <Chart.modalMultipleBar heightRatio={0.5} data= {this.state.secondaryData} id="chart12"/>
+                            <Chart.modalMultipleBar heightRatio={0.6} data= {this.state.secondaryData} id="chart12"/>
                         </div>
                         </Update>
 

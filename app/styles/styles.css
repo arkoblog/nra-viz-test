@@ -214,11 +214,27 @@ a:focus,
     font-weight:300;
 }
 
+.click-icon {
+    font-size:25px;
+}
+
 .info-text {
     font-family: 'Open Sans', serif;
     font-size:10px;
     color:rgb(68, 132, 206);
-    max-width:275px;
+    /*max-width:295px;*/
+}
+
+.sidebar-info-text {
+    max-height:70vh;
+    overflow-y:scroll;
+    /*max-width: 331px;*/
+}
+
+.sidebar-info-insights {
+    max-height:70vh;
+    overflow-y:scroll;
+    /*max-width: 331px;*/
 }
 
 .proportion-surveys{
@@ -240,23 +256,14 @@ a:focus,
 .bar-header {
     color: rgb(68, 132, 206);
     font-weight: bold;
-    font-size: 12px;
+    font-size: 14px;
     text-transform: uppercase;
-
-}
-
-.bar-header-about {
-    color: rgb(68, 132, 206);
-    font-weight: bold;
-    font-size: 12px;
-    text-transform: uppercase;
-    margin-bottom: 20px;
 
 }
 
 .footnote{
     color: rgb(68, 132, 206);
-    font-size: 10px;
+    font-size: 12px;
     padding-right:50px;
     text-transform: none;
     font-weight:300;
@@ -296,7 +303,7 @@ a:focus,
 /*Links*/
 .more > a{
     font-family: 'Open Sans', serif;
-    font-size: 10px;
+    font-size: 12px;
     color: #ff7e35;
     /*background-color: #F55800;*/
 }
@@ -304,7 +311,7 @@ a:focus,
 
 .more > a:hover{
     font-family: 'Open Sans', serif;
-    font-size: 10px;
+    font-size: 12px;
     /*font-weight:700;*/
     text-decoration: underline;
     color: #ff7e35 ;
@@ -373,7 +380,11 @@ a:focus,
 }
 
 
-
+.info-content {
+    list-style: georgian;
+    /*text-align: justify;*/
+/*    text-justify: inter-word;*/
+}
 /*Charts*/
 
 .tooltip {
@@ -383,13 +394,13 @@ a:focus,
 }
 
 .c3-text{
-    font-size: 10px;
+    font-size: 12px;
     font-family: 'Open Sans', serif;
     
 }
 
 .modal-header .c3-text {
-    font-size:9px;
+    font-size:12px;
 }
 
 
@@ -611,9 +622,4 @@ overflow-y: hidden; */
 .info-content p {
     font-size: 12px;
     font-family: 'Open Sans', serif;
-
-}
-
-.info-content {
-        list-style: georgian outside;
 }
