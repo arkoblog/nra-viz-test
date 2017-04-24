@@ -19,7 +19,7 @@ var Update = React.createClass({
 		            <div className="clearfix row-fluid" style = {{opacity:this.props.config.opacity, pointerEvents: this.props.config.allowPointer}}>
 							{this.props.children}
 					</div>
-            		<div className = "center-div"><Loading type='bars' color={this.getColor()} /></div>
+            		<div className = "center-div"><Loading type='bars' style = {{pointerEvents:"none"}}color={this.getColor()} /></div>
         	</div>
         );
     }

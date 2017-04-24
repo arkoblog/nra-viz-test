@@ -51,7 +51,7 @@ a:focus {
 
 ul,
 ol {
-    list-style: none;
+    /*list-style: none;*/
 }
 
 .nopadding {
@@ -154,7 +154,7 @@ a:focus,
     color: rgb(68, 132, 206);
 }
 
-.bold {
+.bolder {
     font-weight: 700;
 }
 
@@ -210,12 +210,39 @@ a:focus,
     padding-top:25px;
 }
 
+.bold {
+    font-weight:300;
+}
+
+.click-icon {
+    font-size:25px;
+}
+
+.info-text {
+    font-family: 'Open Sans', serif;
+    font-size:10px;
+    color:rgb(68, 132, 206);
+    /*max-width:295px;*/
+}
+
+.sidebar-info-text {
+    max-height:70vh;
+    overflow-y:scroll;
+    /*max-width: 331px;*/
+}
+
+.sidebar-info-insights {
+    max-height:70vh;
+    overflow-y:scroll;
+    /*max-width: 331px;*/
+}
+
 .proportion-surveys{
     color: rgb(68, 132, 206);
     /*font-weight: bolder;*/
     font-size: 12px;
     text-transform: uppercase;
-    margin-top: -8px;
+    margin-top: -6px;
 }
 
 .total-survey-label {
@@ -229,18 +256,67 @@ a:focus,
 .bar-header {
     color: rgb(68, 132, 206);
     font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+
+}
+
+.footnote{
+    color: rgb(68, 132, 206);
+    font-size: 12px;
+    padding-right:50px;
+    text-transform: none;
+    font-weight:300;
+
+}
+
+.modal-header {
+    color: rgb(68, 132, 206);
+    font-weight: bold;
     font-size: 12px;
     text-transform: uppercase;
+    font-family: 'Open Sans', serif;
+    border:none;
+    /*margin-top:-8px;*/
+    padding:0;
+    
 }
 
+.modal-title {
+        font-size: 16px;
+        margin-bottom:10px;
+        padding-bottom:5px;
+        border-bottom: 1px solid rgba(68, 132, 206, 0.5);
+}
 
-/*Links*/
+.leaflet-container {
+    background: rgb(245,245,245);
+}
+
 
 .more {
+    display:inline;
+    /*display: table-cell;*/
+/*margin-top:-100px;*/
+    /*float:left;*/
+}
+/*Links*/
+.more > a{
     font-family: 'Open Sans', serif;
-    font-size: 10px;
+    font-size: 12px;
+    color: #ff7e35;
+    /*background-color: #F55800;*/
 }
 
+
+.more > a:hover{
+    font-family: 'Open Sans', serif;
+    font-size: 12px;
+    /*font-weight:700;*/
+    text-decoration: underline;
+    color: #ff7e35 ;
+    cursor:pointer;
+}
 
 /*Modal*/
 
@@ -256,13 +332,14 @@ a:focus,
     height: 29px;
     overflow: hidden;
     font-family: 'Open Sans', serif;
+    /*font-size:10px;*/
     color: rgb(68, 132, 206);
 }
 
 .styled-select select {
     background: transparent;
     border: none;
-    font-size: 14px;
+    font-size: 12px;
     height: 29px;
     padding: 0px;
     /* If you add too much padding here, the options won't show in IE */
@@ -291,7 +368,7 @@ a:focus,
 }
 
 .blue {
-    background-color: rgba(41, 191, 154, 0.1);
+    background-color: rgba(11, 79, 161, 0.1);
 }
 
 .slight-padding {
@@ -302,16 +379,12 @@ a:focus,
     border-left: 1px dashed rgba(41, 191, 154, 0.5);
 }
 
-.modal-header {
-    font-family: 'Open Sans', serif;
-    color: rgb(68, 132, 206);
-    text-transform: uppercase;
-    padding-left: 0;
-    border-bottom: 1px solid rgba(41, 191, 154, 0.5);
-    /*font-size: 30px;*/
+
+.info-content {
+    list-style: georgian;
+    /*text-align: justify;*/
+/*    text-justify: inter-word;*/
 }
-
-
 /*Charts*/
 
 .tooltip {
@@ -321,17 +394,66 @@ a:focus,
 }
 
 .c3-text{
-    font-size: 10px;
+    font-size: 12px;
     font-family: 'Open Sans', serif;
+    
 }
+
+.modal-header .c3-text {
+    font-size:12px;
+}
+
+
+.chart-container .c3-tooltip-container{
+    margin-left:150px;
+}
+
+.reset-btn {
+    background-color: rgb(68, 132, 206);
+    font-family: 'Open Sans', serif;
+
+}
+.c3-tooltip  td {
+    font-size:10px;
+    font-style:normal;    
+}
+
+
+.c3-tooltip  th {
+    background-color: rgb(68, 132, 206);
+    font-size:10px;
+    font-style:normal;
+
+}
+
+.c3-region.region1 {
+  fill: #053064;
+  border:1px solid #000;
+}
+
+.c3-region.region2 {
+  fill: #4483ce;
+}
+/*.c3-region.region3 {
+  fill: blue;
+}*/
 /*Zoom buttons*/
  .leaflet-control-zoom  {
   border-radius: 0px;
 }
 
+.single-chart {
+    margin-top:11px;
+}
+
+.single-chart-installment {
+    margin-top:18px;
+}
 /* popup */
 
-
+.secondary-chart {
+    margin-left:-40px;
+}
 
 .custom {
     font-family: 'Open Sans';
@@ -403,7 +525,7 @@ a:focus,
 
 .center-div {
   position: fixed; /* or absolute */
-  top: 50%;
+  top: 20%;
   left: 50%;
   z-index: 10000000000000;
   /* bring your own prefixes */
@@ -421,18 +543,21 @@ a:focus,
 }
 
 .center-div > svg {
-    width: 300;
+    /*width: 300;*/
 }
 
 .info{
-    background-color: rgb(245,245,245,0.8);
+    background-color: rgba(245,245,245,0.8);
     padding:10px;
     z-index: 1000000;
     font-family: 'Open Sans', serif;
     font-size:12px;
     color:rgb(68, 132, 206);
     max-width:190px;
+    /*margin-left: -100px;*/
 }
+
+
 
 .legend-header{
     /*text-transform: uppercase;*/
@@ -445,6 +570,20 @@ a:focus,
 
 .legend-icon {
     padding-right:10px;
+    font-size: 20px;
+}
+
+.legend-label {
+    /*vertical-align: text-top;*/
+    position:absolute; 
+    top:50%; 
+    height:10em; 
+    margin-top:-10px
+    /*padding-top:3px;*/
+}
+
+.legend-parent {
+    position:relative;
 }
 
 .legend-description{
@@ -478,4 +617,9 @@ overflow-y: hidden; */
     position:absolute;
     width:100%;
     height:100%;
+}
+
+.info-content p {
+    font-size: 12px;
+    font-family: 'Open Sans', serif;
 }

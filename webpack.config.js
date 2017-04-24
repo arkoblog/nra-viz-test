@@ -16,7 +16,7 @@ module.exports = {
     },
     module: {
         loaders: [
-            {  test: /\.(png|jpg|gif)$/,  loader: 'url-loader'  },
+            { test: /\.(png|jpg|gif)$/,  loader: 'url-loader'  },
             { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
             { test: /\.css$/, loader: "style-loader!css-loader" }
         ]
@@ -25,5 +25,4 @@ module.exports = {
     node: {
         fs: "empty"
     }
-
 }

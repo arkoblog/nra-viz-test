@@ -5,7 +5,7 @@ var axios = require('axios')
 var Sidebar = require('./Sidebar')
 var FetchData = require('../utils/FetchData')
 var Loading = require('react-loading');
-var Update = require('../utils/Update')
+var Update = require('../utils/Update');
 require("../styles/styles.css")
 
 var Root = React.createClass({
@@ -72,7 +72,7 @@ var Root = React.createClass({
         }
     },
     onParameterChange(params, callback) {
-        FetchData(params).then(function(response) {
+        FetchData.fetchData(params).then(function(response) {
             // console.log("Fetched Data", response)
 
             this.setState({
@@ -99,25 +99,29 @@ var Root = React.createClass({
     },
     onSelectionUpdate: function(newParams, callback) {
         // console.log("Updated Parameters",newParams);
-        this.setState({
-            updaterConfig: { opacity: 0.4, allowPointer: "none" }
-        })
-        if (newParams.district == "*") {
-            this.setState({
-                header: "All Districts".toUpperCase()
-            })
-        } else {
-            this.setState({
-                header: (newParams.name).toUpperCase()
-            })
-        }
-
         var params = {
             district: newParams.district,
             vdc: newParams.vdc
         }
 
-        this.onParameterChange(params, callback)
+
+        if (newParams.district == "*") {
+            this.setState({
+                header: "All Districts".toUpperCase(),
+                updaterConfig: { opacity: 0.4, allowPointer: "none" },
+                filterParams:params
+
+            }, this.onParameterChange(params, callback))
+        } else {
+            this.setState({
+                header: (newParams.name).toUpperCase(),
+                updaterConfig: { opacity: 0.4, allowPointer: "none" },
+                filterParams:params
+            }, this.onParameterChange(params, callback))
+        }
+
+
+
     },
 
     render: function() {
@@ -129,8 +133,8 @@ var Root = React.createClass({
                 <div>
                         <Nav/>
                         <Update config ={this.state.updaterConfig}>
-                        <NepalMap config = {this.state.updaterConfig} data = {this.state.data} onSelectionUpdate={this.onSelectionUpdate} sidebarOpener={this.sidebarOpener}> 
-                        <Sidebar data={this.state.data} header={this.state.header}/> </NepalMap>
+                        <NepalMap config = {this.state.updaterConfig} header = {this.state.header} data = {this.state.data} onSelectionUpdate={this.onSelectionUpdate} sidebarOpener={this.sidebarOpener}> 
+                        <Sidebar locationParams = {this.state.filterParams} data={this.state.data} header={this.state.header}/> </NepalMap>
                         </Update>
                 </div>
             )
